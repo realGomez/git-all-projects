@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map</title>
+</head>
+<body>
+
+
+<script>
+    const m = new Map();
+    const o = {p: 'Hello World'};
+   console.log(m.set(o, 'content'));
+   console.log( m.get(o)); // "content"
+   console.log(m.has(o)) ;// true
+   console.log(m.delete(o)) ; // true
+   console.log( m.has(o)); // false
+</script>
+
+</body>
+</html>
