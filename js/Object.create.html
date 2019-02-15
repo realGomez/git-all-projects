@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Object.create</title>
 </head>
 <body>
-
+<pre>
 https://blog.csdn.net/u013513053/article/details/80612421
 通过Object.create 方法可以创建对象，在这里有两个参数，第一个参数是对象，第二个参数是该对象的属性设置
 
@@ -84,7 +84,7 @@ Object.defineProperty(object,propertyname,descriptor) 方法用于创建或配�
 Object.defineProperty(object,descriptors)方法用于创建或配置对象的多个属性的描述符，返回配置后的对象
 Object.create(proto,descriptors)方法使用指定的原型和属性来创建一个对象
 
-
+</pre>
 <script>
     var obj = Object.create({},{
         "a":{value :1,congigurable :false,enumerable :true,writable:true},

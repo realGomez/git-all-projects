@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reflect</title>
+</head>
+<body>
+
+
+<script>
+    var myObject = {
+        foo: 1,
+    };
+
+    // 旧写法
+    console.log('foo' in myObject);
+    // 新写法
+    console.log(Reflect.has(myObject, 'foo'));
+</script>
+
+</body>
+</html>
