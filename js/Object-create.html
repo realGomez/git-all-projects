@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+https://blog.csdn.net/u013513053/article/details/80612421
+通过Object.create 方法可以创建对象，在这里有两个参数，第一个参数是对象，第二个参数是该对象的属性设置
+
+我们可以这样去创建对象
+
+var obj = Object.create({})
+var obj = Object.create({},{
+"a":{value :1,congigurable :false,enumerable :true,writable:true},
+"b":{value :2,congigurable :false,enumerable :true,writable:true},
+"c":{value :3,congigurable :false,enumerable :true,writable:true}
+});
+
+console.log(obj.a)//输出 1
+console.log(obj.b)//输出 2
+console.log(obj.c)//输出 3
+
+在这里，我们可以看到创建了一个对象，并且这个对象有三个属性 a,b,c
+但是不单单是简单的三个属性，如果这样也没必要说了
+
+第二个参数是一个对象的形式配置的，key就是属性的名称，value 又是一个对象，这里的value对象就是对该属性的描述
+这里value对象有四个属性值value、congigurable 、enumerable 、writable
+
+value
+对象属性的默认值，默认值为undefined
+这个没什么好说的，就是当前属性的属性值。在这个例子里，属性a的值就是1
+
+congigurable
+能否使用delete、能否需改属性特性、或能否修改访问器属性、，false为不可重新定义，默认值为true
+简单的说 ，设置这个为false之后，就不能删除这个属性或修改这个属性（属性值不影响），这个属性就是这个对象固有的，如果删除，则不成功
+
+var obj = Object.create({},{
+"a":{value :1,congigurable :false,enumerable :true,writable:true},
+});
+
+delete obj.a// 删除失败，普通模式没有提示或错误，严格模式会有TypeError
+obj.a = 2;
+console.log(obj.a);//正常使用，输出结果为 2
+
+enumerable
+可枚举性
+对象属性是否可通过for-in循环，flase为不可循环，默认值为true
+简单的说，当你想用 for-in 遍历这个对象的时候，正常会输出每一个属性，但当你设置false时，这个属性就不会被for-in 遍历读到
+
+var obj = {
+a: 1,
+b: 2,
+c: 3
+};
+obj = Object.create(obj, {
+"a": {
+value: 1,
+congigurable: false,
+enumerable: false,
+writable: false
+}
+});
+
+for(var i in obj) {
+console.log(i); //输出b，c 不会输出a，a已经设置不被枚举
+}
+
+writable
+对象属性是否可修改,flase为不可修改，默认值为true
+设置不可修改后，可以理解为常量，不能对属性值进行修改
+
+var obj = Object.create({},{
+"a":{value :1,congigurable :false,enumerable :true,writable:false},
+});
+obj.a = 2;//普通模式不会抛异常，严格模式会抛出TypeError
+console.log(obj.a);//输出1 ，不可被修改
+
+除了Object.create() 可以这样使用外，还有Object.defineProperty 和 Object.defineProperties中使用。
+
+Object.getOwnPropertyDescriptor(object, propertyname) 方法用于查询一个属性的描述符，并以对象的形式返回
+Object.defineProperty(object,propertyname,descriptor) 方法用于创建或配置对象的一个属性的描述符，返回配置后的对象
+Object.defineProperty(object,descriptors)方法用于创建或配置对象的多个属性的描述符，返回配置后的对象
+Object.create(proto,descriptors)方法使用指定的原型和属性来创建一个对象
+
+
+<script>
+    var obj = Object.create({},{
+        "a":{value :1,congigurable :false,enumerable :true,writable:true},
+        "b":{value :2,congigurable :false,enumerable :true,writable:true},
+        "c":{value :3,congigurable :false,enumerable :true,writable:true}
+    });
+
+    console.log(obj.a)//输出 1
+    console.log(obj.b)//输出 2
+    console.log(obj.c)//输出 3
+
+</script>
+
+</body>
+</html>
