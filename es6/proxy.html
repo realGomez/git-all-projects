@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+    var proxy = new Proxy({h:"b"},{
+        get:function (target,property) {
+            return target;
+        }
+    });
+
+   console.log(proxy.time);
+</script>
+</body>
+</html>

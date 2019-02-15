@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // function timeout(ms) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(resolve, ms, 'done');
+    //     });
+    // }
+    //
+    // timeout(100).then((value) => {
+    //     console.log(value);
+    // });
+
+    const promise = new Promise(function(resolve, reject) {
+        // ... some code
+
+        var secc = false;
+
+        if (secc){
+            resolve("success");
+        } else {
+            reject("fail");
+        }
+    });
+
+
+    promise.then(function(value) {
+        // success
+        console.log(value);
+    }, function(error) {
+        // failure
+        console.log(error);
+    });
+
+
+    function tb(m) {
+        console.log(m)
+    }
+
+    setTimeout(tb,300,"ttbb");
+</script>
+
+</body>
+</html>
