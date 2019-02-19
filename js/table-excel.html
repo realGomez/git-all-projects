@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+    window.onload = function (ev) {
+        var html = "<html><head><meta charset='utf-8' /></head><body>" + document.getElementById("entity_id_table").outerHTML + "</body></html>";
+        var blob = new Blob([html], { type: "application/vnd.ms-excel" });
+        var a = document.getElementById("indent-data");
+        a.href = URL.createObjectURL(blob);
+        a.download = "indentData.xls";
+
+    };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="exportTableToCSV('members.csv')">Export HTML Table To CSV File</button>
+<table id="entity_id_table">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Country</th>
+    </tr>
+    <tr>
+        <td>John Doe</td>
+        <td>john@gmail.com</td>
+        <td>USA</td>
+    </tr>
+    <tr>
+        <td>Stephen Thomas</td>
+        <td>stephen@gmail.com</td>
+        <td>UK</td>
+    </tr>
+    <tr>
+        <td>Natly Oath</td>
+        <td>natly@gmail.com</td>
+        <td>France</td>
+    </tr>
+</table>
+
+<script>
+    function downloadCSV(csv, filename) {
+        var csvFile;
+        var downloadLink;
+
+        // CSV file
+        csvFile = new Blob([csv], {type: "text/csv"});
+
+        // Download link
+        downloadLink = document.createElement("a");
+
+        // File name
+        downloadLink.download = filename;
+
+        // Create a link to the file
+        downloadLink.href = window.URL.createObjectURL(csvFile);
+
+        // Hide download link
+        downloadLink.style.display = "none";
+
+        // Add the link to DOM
+        document.body.appendChild(downloadLink);
+
+        // Click download link
+        downloadLink.click();
+    }
+
+
+    function exportTableToCSV(filename) {
+        var csv = [];
+        var rows = document.querySelectorAll("table#entity_id_table tr");
+
+        for (var i = 0; i < rows.length; i++) {
+            var row = [], cols = rows[i].querySelectorAll("td, th");
+
+            for (var j = 0; j < cols.length; j++)
+                row.push(cols[j].innerText);
+
+            csv.push(row.join(","));
+        }
+
+        // Download CSV file
+        downloadCSV(csv.join("\n"), filename);
+    }
+
+
+    function downloadCSV(csv, filename) {
+        var csvFile;
+        var downloadLink;
+
+        // CSV file
+        csvFile = new Blob([csv], {type: "text/csv"});
+
+        // Download link
+        downloadLink = document.createElement("a");
+
+        // File name
+        downloadLink.download = filename;
+
+        // Create a link to the file
+        downloadLink.href = window.URL.createObjectURL(csvFile);
+
+        // Hide download link
+        downloadLink.style.display = "none";
+
+        // Add the link to DOM
+        document.body.appendChild(downloadLink);
+
+        // Click download link
+        downloadLink.click();
+    }
+
+
+    function exportTableToCSV(filename) {
+        var csv = [];
+        var rows1 = document.querySelectorAll("table#entity_id_table tr.headings");
+
+        for (var i = 0; i < rows1.length; i++) {
+            var row1 = [], cols1 = rows1[i].querySelectorAll("td, th");
+
+            for (var j = 0; j < cols1.length; j++){
+
+                var grg = /\n/g;
+                if (grg.test(cols1[j].innerText)){
+                    row1.push(cols1[j].innerText.replace(/\n/g,""));
+                }else{
+                    row1.push(cols1[j].innerText);
+                }
+
+            }
+
+            csv.push(row1.join(","));
+        }
+
+        var rows2 = document.querySelectorAll("table#entity_id_table tbody tr");
+
+        for (var k = 0; k < rows2.length; k++) {
+            var row2 = [], cols2 = rows2[k].querySelectorAll("td, th");
+
+            for (var h = 0; h < cols2.length; h++){
+
+                var grg = /\n/g;
+                var dating = /,/g;
+                if (grg.test(cols2[h].innerText)){
+                    row2.push(cols2[h].innerText.replace(/\n/g,""));
+                }else if(dating.test(cols2[h].innerText)){
+                    row2.push(cols2[h].innerText.replace(/,/g,"/"));
+                }else{
+                    row2.push(cols2[h].innerText);
+                }
+            }
+
+
+            csv.push(row2.join(","));
+        }
+
+        // Download CSV file
+        downloadCSV(csv.join("\n"), filename);
+    }
+</script>
+
+</body>
+</html>
