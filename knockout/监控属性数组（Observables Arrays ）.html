@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div>
+			监控属性数组（Observables Arrays ）
+		</div>
+		
+		<script src="knockout-3.4.2.js"></script>
+		<script>
+			var myObservableArray = ko.observableArray(); 
+            myObservableArray.push('Some value');myObservableArray.push('Some value'); 
+//          var anotherObservableArray = ko.observableArray([  
+//				{name: "Bungle", type: "Bear" }, 
+//				{name: "George", type: "Hippo" },
+//				{name: "Zippy", type: "Unknown" }
+//			]);
+
+			console.log('The length of the array is ' + myObservableArray().length); 
+			console.log('The first element is ' + myObservableArray()[0]);
+			
+
+		</script>
+	</body>
+</html>
