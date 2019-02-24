@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div>
+			The name is <span data-bind="text:personName"></span>
+		</div>
+		
+		<script src="knockout-3.4.2.js"></script>
+		<script>
+			
+			
+//			var myViewModel = {personName:"Gomez",personAge:26};
+//			ko.applyBindings(myViewModel,document.getElementById("ko"));
+			
+//			你需要将你的model属性声明成observable的, 因为它是非常特殊的JavaScript 对象，能够通知用户它的改变以及自动检测依赖关系。
+
+			var myViewModel = {
+				personName: ko.observable('Gomez'),
+				personAge: ko.observable(26)
+			};
+			ko.applyBindings(myViewModel,document.getElementById("ko"));
+			
+//			监控属性的显示订阅
+			myViewModel.personName.subscribe(function(newValue) {
+			   alert("The person's new name is " + newValue);
+			});
+			
+			console.log(myViewModel.personName(),myViewModel.personAge());
+			myViewModel.personName('kobe').personAge(40) 
+			console.log(myViewModel.personName(),myViewModel.personAge());
+			
+//			subscription.dispose(); 
+// I no longer want notifications
+		</script>
+	</body>
+</html>
