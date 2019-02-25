@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Submit</title>
+</head>
+<body>
+
+<form data-bind="submit: doSomething">
+    <input type="text">
+
+
+    <button type="submit">
+        Submit
+    </button>
+
+</form>
+<script src="knockout-3.4.2.js"></script>
+    <script type="text/javascript">
+        var viewModel = {
+            doSomething: function(formElement) {
+                console.log("submit")
+            }
+        };
+        ko.applyBindings(viewModel);
+
+    </script>
+</body>
+</html>

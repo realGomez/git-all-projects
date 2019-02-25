@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>value 绑定</title>
+</head>
+<body>
+<p>
+    Login name:
+    <input data-bind="value: userName" />
+</p>
+<p>
+    Password:
+</p>
+
+<script src="knockout-3.4.2.js"></script>
+<script type="text/javascript">
+    var viewModel = {
+        userName: ko.observable("Gomez")
+   };
+ko.applyBindings(viewModel);
+</script>
+</body>
+</html>

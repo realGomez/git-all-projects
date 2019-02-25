@@ -6,13 +6,14 @@
 </head>
 <body>
 
-<div data-bind="css: { profitWarning: currentProfit() < 0 }">
+<div data-bind="css: { profitWarning: currentProfit() < 0,majorHighlight: isSevere }">
     Profit Information
 </div>
 <script src="knockout-3.4.2.js"></script>
 <script>
     var viewModel = {
-        currentProfit: ko.observable(150000)
+        currentProfit: ko.observable(150000),
+        isSevere:true
         // Positive value, so initially we don't apply the "profitWarning" class
     };
 

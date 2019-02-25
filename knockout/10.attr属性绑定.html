@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>attr属性绑定</title>
+</head>
+<body>
+
+<a data-bind="attr: { href: url, title: details }">
+    Report
+</a>
+<script src="knockout-3.4.2.js"></script>
+<script type="text/javascript">
+    var viewModel = {
+        url: ko.observable("year-end.html"),
+        details: ko.observable("Report including final year-end statistics")
+    };
+
+    ko.applyBindings(viewModel);
+</script>
+</body>
+</html>

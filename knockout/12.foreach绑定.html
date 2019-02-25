@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>foreach绑定</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr><th>First name</th><th>Last name</th></tr>
+    </thead>
+    <tbody data-bind="foreach: people">
+    <tr>
+        <td data-bind="text: firstName"></td>
+        <td data-bind="text: lastName"></td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="knockout-3.4.2.js"></script>
+<script type="text/javascript">
+    ko.applyBindings({
+        people: [
+            { firstName: 'Bert', lastName: 'Bertington' },
+            { firstName: 'Charles', lastName: 'Charlesforth' },
+            { firstName: 'Denise', lastName: 'Dentiste' }
+        ]
+    });
+</script>
+</body>
+</html>

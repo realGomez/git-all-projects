@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Style属性绑定</title>
+</head>
+<body>
+
+<div data-bind="style: { color: currentProfit() < 0 ? 'red' : 'black' }">Style属性绑定</div>
+
+<script src="knockout-3.4.2.js"></script>
+<script>
+    var viewModel = {
+        currentProfit: ko.observable(150000)
+        // Positive value, so initially black
+    };
+    ko.applyBindings(viewModel);
+    viewModel.currentProfit(-50);
+    // Causes the DIV's contents to go red
+</script>
+
+</body>
+</html>

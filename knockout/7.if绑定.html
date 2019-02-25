@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>if绑定</title>
+</head>
+<body>
+
+<label>
+    <input type="checkbox" data-bind="checked: displayMessage" />
+    Display message
+</label>
+<div data-bind="if: displayMessage">
+    Here is a message. Astonishing.
+</div>
+<script src="knockout-3.4.2.js"></script>
+<script type="text/javascript">
+    ko.applyBindings({
+        displayMessage: ko.observable(false)
+    });
+</script>
+
+</body>
+</html>
