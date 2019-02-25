@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css类名</title>
+</head>
+<body>
+
+<div data-bind="css: { profitWarning: currentProfit() < 0 }">
+    Profit Information
+</div>
+<script src="knockout-3.4.2.js"></script>
+<script>
+    var viewModel = {
+        currentProfit: ko.observable(150000)
+        // Positive value, so initially we don't apply the "profitWarning" class
+    };
+
+    ko.applyBindings(viewModel);
+    viewModel.currentProfit(-50);
+    // Causes the "profitWarning" class to be applied
+</script>
+
+</body>
+</html>

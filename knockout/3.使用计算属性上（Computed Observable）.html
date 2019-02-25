@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用计算属性上（Computed Observable）</title>
+</head>
+<body>
+
+使用计算属性上（Computed Observable）
+
+
+<div>
+    <span data-bind="text:fullName"></span>
+</div>
+<script src="knockout-3.4.2.js"></script>
+<script>
+    function appViewModel() {
+        this.firstName = ko.observable("Gomez");
+        this.lastName = ko.observable("Smith");
+        this.fullName = ko.computed(function () {
+            return this.firstName() + "." + this.lastName();
+        },this);
+    }
+
+    // new appViewModel();
+    var appV = new appViewModel();
+
+    ko.applyBindings(appV);
+
+    appV.firstName("bisley");
+
+
+
+</script>
+</body>
+</html>

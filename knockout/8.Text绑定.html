@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text绑定</title>
+</head>
+<body>
+
+Today's message is <span data-bind="text:msg"></span>
+
+
+<div>
+</div>
+<script src="knockout-3.4.2.js"></script>
+<script>
+    var viewModel = {
+        msg:ko.observable(),
+        price:ko.observable(26)
+    };
+
+    ko.applyBindings(viewModel);
+    viewModel.msg("hello Gomez!");
+
+
+
+</script>
+</body>
+</html>
