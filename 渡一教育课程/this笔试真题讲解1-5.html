@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>this笔试真题讲解1</title>
+	</head>
+	<body>
+		
+		
+		<pre>
+		function b(x,y,a){
+				arguments[2] = 10;
+				console.log(a);
+			}
+			b(1,2,3);
+		</pre>
+
+		
+		
+		<script>
+			function b(x,y,a){
+				arguments[2] = 10;
+				console.log(a);
+			}
+			b(1,2,3);
+			
+			function c(x,y,a){
+				a = 10;
+				
+				console.log(arguments[2] );
+			}
+			c(1,2,3);
+		</script>
+		
+	</body>
+</html>

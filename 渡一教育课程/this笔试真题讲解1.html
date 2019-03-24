@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>this笔试真题讲解1</title>
+	</head>
+	<body>
+		
+		变量提升
+		<div>
+		 var y=z=0; 等价 var y=0,z=0;
+			
+		</div>
+
+		
+		
+		<script>
+			var x=1,y=z=0;
+			
+			function add(n){
+				return n = n+1;
+			}
+			y = add(x);
+			
+			function add(n){
+				return n = n+3;
+			}
+			
+//			z = add(x);
+		</script>
+		
+	</body>
+</html>

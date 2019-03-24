@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>this笔试真题讲解-this</title>
+	</head>
+	<body>
+		
+		
+		<pre>
+		1.函数预编译过程 this-->window
+		2.全局作用域里   this-->window
+		3.call/apply可以改变函数运行时this 指向
+		4.Obj.func;func 里面的this 指向Obj;谁调用指向谁
+		
+		</pre>
+
+		
+		
+		<script>
+		
+		
+		var num = (function(n){
+			if(n==1){
+				return 1;
+			}
+			
+			return n*arguments.callee(n-1);
+		}(10))
+			
+			console.log(num);
+		</script>
+		
+	</body>
+</html>

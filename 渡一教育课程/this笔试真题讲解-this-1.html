@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>this笔试真题讲解-this</title>
+	</head>
+	<body>
+		
+		
+		<pre>
+		
+		</pre>
+
+		
+		
+		<script>
+			var bv = "top";
+			
+			function pt(){
+				this.bv = "inside";
+				console.log(bv);
+			}
+			
+			//pt();  // inside   pt 里的this 同样指向  全局
+			
+			new pt();
+			
+		</script>
+		
+	</body>
+</html>

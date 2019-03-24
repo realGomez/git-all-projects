@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>this笔试真题讲解-this</title>
+	</head>
+	<body>
+		
+		
+		<pre>
+		var name = "Gomez";
+			
+			function bv(){
+				var name = "Guitar";
+				console.log(this.name,"---",name);
+
+			}		
+			bv(); //Gomez指向全局    //Guitar
+			
+			
+			var a = {
+			    name:"aaa",
+				say:function(){
+				    var	name = "a.say name";
+					console.log(this.name);
+				}
+			}
+			a.say();// aaa
+			
+			var fun = a.say;
+			
+			var b = {
+				name:"bbb",
+				say:function(t){
+					var name = "b.say name";
+					t();
+				}
+			}
+			
+			b.say(a.say);//Gomez 指向全局
+//			和 a.say() 区别
+			//类似
+			function nm(){				     
+					  console.log(this.name);
+				   }
+			d = {
+				name:"bbb",
+				say:function(){
+					var name = "b.say name";
+					
+					nm();//在里面执行，不是调用，预编译，this指向全局
+					
+				}
+			}
+			d.say();//Gomez
+			
+			b.say=a.say;
+			b.say();//bb
+		
+		</pre>
+
+		
+		
+		<script>
+			var name = "Gomez";
+			
+			function bv(){
+				var name = "Guitar";
+				console.log(this.name,"---",name);
+
+			}		
+			bv(); //Gomez指向全局    //Guitar
+			
+			
+			var a = {
+			    name:"aaa",
+				say:function(){
+				    var	name = "a.say name";
+					console.log(this.name);
+				}
+			}
+			a.say();// aaa
+			
+			var fun = a.say;
+			
+			var b = {
+				name:"bbb",
+				say:function(t){
+					var name = "b.say name";
+					t();
+				}
+			}
+			
+			b.say(a.say);//Gomez 指向全局
+//			和 a.say() 区别
+			//类似
+			function nm(){				     
+					  console.log(this.name);
+				   }
+			d = {
+				name:"bbb",
+				say:function(){
+					var name = "b.say name";
+					
+					nm();//在里面执行，不是调用，预编译，this指向全局
+					
+				}
+			}
+			d.say();//Gomez
+			
+			b.say=a.say;
+			b.say();//bb
+			
+			
+			
+			
+			
+		</script>
+		
+	</body>
+</html>
