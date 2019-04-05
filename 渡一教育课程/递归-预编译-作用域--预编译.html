@@ -16,6 +16,16 @@
 			函数整体提升  变量 声明提升
 			变量未声明赋值  为全局对象所以         声明的全局变量为 window 属性
 			window 是全局域
+		function(x){
+	    	console.log(arguments);
+	    	return x;
+	 }(1,2,3,5)   //报错
+	    
+	    
+	    function foo(x){
+	    	console.log(arguments);
+	    	return x;
+	    }(1,2,3,5) 
 		</pre>
 		<img src="images/预编译-递归-作用域-1.png"/>
 		<script>
