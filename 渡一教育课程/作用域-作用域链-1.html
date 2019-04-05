@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>递归-预编译-作用域</title>
+	</head>
+	<body>
+		
+		
+		<pre>
+			function a(){
+				
+				function b(){
+					
+				}
+			}
+			
+			varglobal = 100;
+			
+			
+			a defined a.[[scope]]->0:GO{}
+			</pre>
+			<img src="images/作用域-作用域链-1.png"/>
+			<pre>
+			a doing a.[[scope]]->0:AO{}
+	     	                     1:GO{}
+		</pre>
+		
+		<img src="images/作用域-作用域链-2.png"/>
+
+
+
+		<pre>
+			b 定义时的GO 和  AO 是 a 产生的，是同一个， 
+		</pre>
+		
+		
+		<img src="images/作用域与作用域链-子函数.png"/>
+		
+		<img src="images/作用域与作用域链-子函数执行.png"/>
+		
+		
+		<img src="images/作用域-作用域链-3.png"/>
+		
+		<img src="images/作用域-作用域链-4.png"/>
+		<script>
+		
+           
+		</script>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>递归-预编译-作用域</title>
+	</head>
+	<body>
+		
+		
+		<pre>
+			js 执行三部曲
+			语法分析
+			预编译
+			解析执行
+			
+			函数整体提升  变量 声明提升
+			变量未声明赋值  为全局对象所以         声明的全局变量为 window 属性
+			window 是全局域
+		</pre>
+		<img src="images/预编译-递归-作用域-1.png"/>
+		<script>
+		
+	    function foo(x){
+	    	console.log(arguments);
+	    	return x;
+	    }(1,2,3,5)
+		</script>
+	</body>
+</html>

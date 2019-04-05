@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>递归-预编译-作用域</title>
+	</head>
+	<body>
+		<pre>
+		函数嵌套，把里面的函数保存到外面，就形成闭包（闭包导致作用域链不释放，造成内核泄露）。再执行时，它能访问原来函数里面的环境变量；
+			
+		</pre>
+
+       <img src="images/作用域与作用域链-闭包.png"/>
+       <img src="images/作用域与作用域链-闭包2.png"/>
+		<script>
+		
+          
+          function a(){
+          	  var g = 100;
+          	  
+          	  function b(){
+          	  	console.log(g)
+          	  }
+          	  
+          	  return b;
+          }
+          var n = a();
+          n();
+          
+          
+          
+          var demo;
+          function test(){
+          	var abc = 100;
+          	function m(){
+          		console.log(abc);
+          	}
+          	
+          	demo = m;
+          }
+          
+          test();
+          demo();
+          
+          //立即执行函数，执行完销毁
+          (function(){
+          	console.log(22);
+          	
+          }())
+          
+          
+//        (function(){
+//        	console.log(22);
+//        	
+//        })()
+          
+//        (function bg(){
+//        	console.log(22);
+//        }())
+          
+        var num =  (function(a,b){
+          	return a+b
+          }(1,2))
+        
+        
+//      只有表达式才能被执行
+
+function bg(){
+	console.log()
+}
+  var b = function bg(){
+	console.log("ggb")
+}();//能被执行 b不再是函数
+
+//function vv(){
+//	console.log("ggb")
+//}();//不能被执行
+
+!function vv(){
+	console.log("ggb")
+}();//能被执行
+		</script>
+	</body>
+</html>

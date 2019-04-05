@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<pre>
+		    原始值没有属性和方法
+			
+			new Number('123') 数字对象  可以有属性  参与运算变回原始值
+			new String('ffffff'),
+			
+			var num = 4;
+			    num.len = "gg";
+			    
+			    console.log(num.len)// undefined
+			    
+			    隐式  new Number(4).len = ""gg;  delete 
+			    
+			  再  new Number(4).len ，最后变成undefined   包装类
+			  
+			  
+			  
+			  var str = "abcd";;
+			  str.length = 2;
+			  
+			  new String("abcd").length = 2; delete
+			  console.log(str);//"abcd"
+			  
+			  console.log(str.length);//4
+			  
+			  new String("abcd").length
+		</pre>
+		
+		
+		<script>
+			
+
+		</script>
+	</body>
+</html>

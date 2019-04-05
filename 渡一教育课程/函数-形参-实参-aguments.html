@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>函数，形参，实参</title>
+	</head>
+	<body>
+		
+		<pre>
+			
+				function add(a,b){
+				//arguments 存实参	
+				a=2;
+				console.log(arguments[0]); //2
+			}
+			
+			function add(a,b){
+				//arguments 存实参				
+				arguments[0] = 3;
+				console.log(a);//3
+			}
+			
+			add(1,2);
+			
+			arguments 和形参 关联,但不是同一个变量  映射规则
+			
+			
+			function vv(a,b){
+				//arguments 存实参				
+				b = 2;
+				console.log(arguments[1]);//undefined 形参与实参相等才映射
+			}
+			vv(1);
+		</pre>
+		
+		<script>
+			
+			function add(a,b){
+				//arguments 存实参	
+				a=2;
+				console.log(arguments[0]); //2
+			}
+			
+			function add(a,b){
+				//arguments 存实参				
+				arguments[0] = 3;
+				console.log(a);//3
+			}
+			
+			add(1,2);
+			
+			function vv(a,b){
+				//arguments 存实参				
+				b = 2;
+				console.log(arguments[1]);//undefined 形参与实参相等才映射
+			}
+			vv(1);
+
+		</script>
+	</body>
+</html>

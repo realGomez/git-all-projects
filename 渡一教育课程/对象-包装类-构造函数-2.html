@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<pre>
+		  function ployee(name,age){
+		  	this.name = "bb";
+		  	this.age = 26;
+		  }
+		  
+		var obj = new ployee("gg",20);
+		
+		obj.name //bb
+		obj.age//26
+		</pre>
+		
+		
+		
+		<script>
+			function person(name,age,sex){
+				var a =0;
+				this.name = name;
+				this.age = age;
+				this.sex = sex;
+				function sss(){
+					a++;
+					document.write(a);
+				}
+				this.say = sss;
+			}
+			
+			var operson = new person();
+			operson.say();
+			operson.say();
+			var operson1 = new person();
+			operson1.say();
+
+		</script>
+	</body>
+</html>

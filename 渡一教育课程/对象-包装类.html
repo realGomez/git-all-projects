@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<pre>
+			增删改查
+			
+			delete
+			
+			
+			变量未声明使用报错，  对象属性未声明 查，undefined
+		</pre>
+		
+		
+		<script>
+			var b = 10;
+			
+			
+			function test(){
+				var b = "mm";
+				console.log(b);
+			};
+			
+			test();
+			
+			
+			var obj = {
+				name:"gomez",
+				age:26,
+				birthday:"1993.5.26",
+				ints:"ball",
+				fn:function(){
+					console.log(this.ints);
+				}
+			}
+			
+			console.log(obj.name);
+			
+			delete obj.name;
+			console.log(obj.name);
+			
+		</script>
+	</body>
+</html>
