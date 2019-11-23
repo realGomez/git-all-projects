@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<div v-for="(value,name,index) in  obj" >
+				{{index}}--{{name}}--{{value}}
+			</div>
+		</div>
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+		<script>
+			
+			
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					obj:{
+						
+						school:"儋州一中",
+						grade:"高一",
+						time:"2016.6",
+						cla:"高三二班"
+					
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

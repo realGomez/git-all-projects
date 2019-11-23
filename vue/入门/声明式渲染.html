@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	  <h1>介绍</h1>	 
+	  <div id="app">
+	  	<div v-if='seen'>if true能看见</div> 
+	  	<div v-show='seen'>show true能看见</div> 
+	  </div>	
+		
+		
+		<div id="app-2">
+			
+			<div v-for='todo in todos'>
+				<p >{{todo.text}}</p>
+			</div>
+			
+		</div>
+		
+		
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<script>
+			var app = new Vue({
+				el:'#app',
+				data:{
+					seen:true,
+				}
+			})
+			
+			var app2 = new Vue({
+				el:'#app-2',
+				data:{
+					todos:[
+					  {text:'学习js'},
+					  {text:'学习vue'},
+					  {text:'整个牛项目'}
+					]
+				}
+				
+			})
+		</script>
+		
+		
+	</body>
+</html>

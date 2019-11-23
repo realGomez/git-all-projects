@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<img src="images/prototype/原型-原型链-3.png" alt="" />
+		
+		
+		<script type="text/javascript">
+			
+			Person.prototype.lastName = "bv";
+			function Person(){
+			
+			}
+			var p1 = new Person();
+			
+//			Person.prototype.lastName = "op";						 
+//			 p1.lastName // op
+			 
+			 Person.prototype = {
+			 	lastName:"jp"
+			 }
+			   
+			    p1.lastName // bv 对象引用
+		</script>
+	</body>
+</html>

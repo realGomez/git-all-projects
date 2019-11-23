@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<h4>绑定css Class</h4>
+		
+		<h5>对象语法</h5>
+		
+		<div v-bind:class="{'css':isActive}">对象绑定</div>
+		
+		<h5>数组绑定</h5>
+		在数组里用对象
+		<div v-bind:class="[arr,attr,gmz,{bg:isActive}]"></div>
+		
+		<h5>眼红在组件上</h5>
+		<v-b class="justin" v-bind:class="{from:isActive}"></v-b>
+		
+		</div>
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+		<script>
+			
+			Vue.component('v-b',{
+				template:"<p class='gm'>component</p>"
+			})
+			
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					isActive:true,
+					arr:'arr',
+					attr:'attr',
+					gmz:'gmz'
+					
+				}
+			})
+		</script>
+	</body>
+</html>

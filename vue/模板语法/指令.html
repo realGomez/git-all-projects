@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<div id="app">
+			<pre>#指令
+			  v-if
+			</pre>
+			<span v-if='seen'>seen v-if</span>
+			
+			<pre>#参数    
+				
+			 v-bind:href=''
+			 v-bind:click=''
+			</pre>
+			
+			<a v-bind:href="baidu">百度一下</a>
+			<div>
+			<span v-on:click='cons'>v-bind:click</span>
+				
+			</div>
+			
+			<div>
+				动态参数  大小写
+				
+					<a v-bind:[attributename]="url">动态属性</div>
+			</div>
+
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+		<script>
+			
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					seen:false,
+					baidu:'http://www.baidu.com',
+					url:'http://www.baidu.com',
+					attributename:'href'
+//					cons:function(){
+//						console.log("ee");
+//					}
+					
+				},
+				methods:{
+					cons:function(){
+						console.log("ee");
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<ul>
+				<li v-for="item in items">
+					{{item.school}}
+				</li>
+			</ul>
+			
+			
+			
+			<div>在 v-for 块中，我们可以访问所有父作用域的属性。v-for 还支持一个可选的第二个参数，即当前项的索引。</div>
+			
+			
+			<ul>
+				<li v-for="(item,index) in items">
+					{{parentMessage}}- {{index}}- {{item.school}}
+				</li>
+			</ul>
+			
+		</div>
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+		<script>
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					parentMessage:"就读学校",
+					items:[
+					  {school:"兰城小学"},
+					  {school:"南司子弟学校"},
+					  {school:"新州一小"},
+					  {school:"那大二中"},
+					  {school:"那大一中"}
+					
+					]
+					
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>递归-预编译-作用域</title>
+	</head>
+	<body>
+		
+		
+		<pre>
+			js 执行三部曲
+			语法分析
+			预编译
+			解析执行
+			
+			函数整体提升  变量 声明提升
+			变量未声明赋值  为全局对象所以         声明的全局变量为 window 属性
+			window 是全局域
+			
+			
+			
+		    function fn(a){
+		      	console.log(a);//f a(){}
+		      	var a = 123;
+		      	console.log(a);//123
+		      	
+		      	function a(){
+		      		
+		      	}
+		      	console.log(a);//123
+		      	var b= function(){
+		      		
+		      	}
+		      	console.log(b);
+	      	
+	       }
+			
+			
+			函数预编译发生在函数执行前一刻
+			1.创建OA Activation Object(执行期上下文（作用域）)
+			AO{
+						
+			}
+			2.找  形参和变量声明，将形参和变量声明作为AO属性名，值为undefined
+			AO{
+				a:undefined,
+				b:undefined			
+			}
+			3.将实参值和形参统一
+			AO{
+				a:1,
+				b:undefined			
+			}
+			4.在函数体里找函数声明，赋值 函数体
+			AO{
+				a:function (){	  },
+				b:undefined	,
+				d:function d(){   }
+			}
+			
+			
+			var a = function(){}  函数表达式
+			function a(){}  函数声明
+			
+			
+			
+			
+			
+			全局预编译
+			
+			GO 即window
+			GO{
+				
+			}
+			
+			 //	      全局预编译
+         var bb = 123;
+         function bb(){
+         	
+         }
+           console.log(bb);//123
+           
+           GO{
+           	bb:undefined
+           }
+           
+           GO{
+           	a:function bb(){ }
+           }
+           
+           a =123;
+		</pre>
+
+		<script>
+		// 函数预编译
+	      function fn(a){
+	      	
+	      	console.log(a);//f a(){}
+	      	var a = 123;//执行的时候仅赋值，var 被提升了
+	      	console.log(a);//123
+	      	
+	      
+	      	console.log(a);//123
+	      		     	    
+	      	
+	      }
+	      
+	      fn(1);
+	      
+	      
+	      
+
+
+		</script>
+	</body>
+</html>

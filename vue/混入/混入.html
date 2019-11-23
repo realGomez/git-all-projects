@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+		
+		<script>
+			
+			var mixin = {
+				data:function(){
+					return{
+						message:'hello',
+						foo:'abc'
+					}
+				}
+			}
+			
+			new Vue({
+				mixins:[mixin],
+				data:function(){
+					return{
+						message:'goodbye',
+						bar:'def'
+					}
+				},
+				create:function(){
+					console.log(this.$data)
+				}
+				
+				
+			})
+			
+			
+		</script>
+	</body>
+</html>

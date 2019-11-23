@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="map.css"/>
+	</head>
+	<body>
+
+<div class="map-wrapper">
+
+    <div id="map-layout"></div>
+
+    <div id="map-panel">
+        <div class="map-panel-tab">
+            <ul>
+                <li class="map-panel-filter" data-href="#map-panel-filter-content">Filter</li>
+                <li class="map-panel-search" data-href="#map-panel-search-content" >Search</li>
+                <li class="map-panel-nearby active" data-href="#map-panel-nearby-content">Nearby</li>
+            </ul>
+            <div class="panel-ctrl"></div>
+        </div>
+        <div class="map-panel-content">
+            <div id="map-panel-filter-content" class="map-panel-detail">
+                <div class="city filter-item">
+                    <div  id="open-cities" class="filter-list">Select</div>
+                    <ul id="evisu-cities">
+
+                    </ul>
+                </div>
+                <div class="district filter-item">
+                    <div id="open-district">Cities</div>
+                    <ul id="evisu-district">
+
+                    </ul>
+                </div>
+            </div>
+            <div id="map-panel-search-content" class="map-panel-detail">
+                <div class="search-wrapper">
+                    <input type="text" placeholder="Enter"><button><span></span></button>
+                </div>
+                <div class="clear-search"> <a>clear search text</a></div>
+            </div>
+            <div id="map-panel-nearby-content" class="map-panel-detail  active">
+                <button>find nearby stores</button>
+            </div>
+        </div>
+
+        <div class="store-list">
+            <ul id="result-store-list"></ul>
+        </div>
+    </div>
+</div>
+
+
+<form id="web-url-form" action="#" method="get" target="_blank">
+    <input type="hidden" name="api" value="1"/>
+    <input type="hidden" name="query" value=""/>
+</form>
+
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://ditu.google.cn/maps/api/js?&key=AIzaSyCxUxhZgZHVxphtKv-C2OP32HlUXXXkLGs"></script>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?&key=<?php echo $baiduAK; ?>"></script>-->
+
+<script type="text/javascript">
+//  var allLocations = <?= $block->getAllLocationInfoJson(); ?>;
+//  var allStores = <?= $block->getAllStoreInfoJson(); ?>;
+
+var allLocations = {
+    guangzhou:{
+        name:"广州",
+        children:{
+            yuexiu:{
+                name:"越秀区",
+            },
+            tianhe:{
+                name:"天河区"
+            },
+            haizhu:{
+                name:"海珠区"
+            }
+        }
+    },
+    shenzhen:{
+        name:"深圳",
+        children:{
+            baoan:{
+              name:"宝安区",
+            },
+            luohu:{
+              name:"罗湖区"
+            },
+            futian:{
+              name:"福田区"
+            },
+            longhua:{
+             name:"龙华区"
+            }
+
+        }
+    },
+    shanghai:{
+        name:"上海"
+    }
+};
+
+
+var allStores = {
+    haizhu:[
+        {
+            identifier:"zhujiangxincheng",
+            name:"珠江新城分店",
+            status:"1",
+            latitude:"23.125868",
+            longitude:"113.328974",
+            store_address:"珠江新城分店888号"
+        },
+        {
+            identifier:"changlong",
+            name:"长隆",
+            status:"1",
+            latitude:"23.008296",
+            longitude:"113.332136",
+            store_address:"长隆分店888号"
+        }
+    ],
+    longhua:[
+        {
+            identifier:"shenzhennorth",
+            name:"深圳北",
+            status:"1",
+            latitude:"22.615731",
+            longitude:"114.035617",
+            store_address:"深圳北分店888号"
+        }
+    ],
+    futian:[
+        {
+            identifier:"chengongmiao",
+            name:"车公庙",
+            status:"1",
+            latitude:"22.542382",
+            longitude:"114.031736",
+            store_address:"车公庙分店888号"
+        },
+        {
+            identifier:"cocopark",
+            name:"cocopark分店",
+            status:"1",
+            latitude:"22.540513",
+            longitude:"114.059835",
+            store_address:"cocopark分店888号"
+        },
+        {
+            identifier:"close",
+            name:"close莲花山分店",
+            status:"0",
+            latitude:"22.559538",
+            longitude:"114.065009",
+            store_address:"close莲花山分店888号"
+        },
+    ]
+};
+
+
+    $(function () {
+
+        //面板
+        $(".map-panel-tab li").on("click",function () {
+            $(".map-panel-tab li").removeClass("active");
+            $(this).addClass("active");
+
+            var index = $(this).index();
+            $(".map-panel-detail").removeClass("active");
+            $(".map-panel-detail").eq(index).addClass("active");
+        });
+
+        var cities = "<li data-href='allstores' class='filter-list'>All Stores</li>";
+        for(city in allLocations){
+            cities += "<li data-href='"+city+"' class='filter-list'>" + allLocations[city].name+"</li>";
+        }
+        $("#evisu-cities").html(cities);
+
+        $(window).on("click",function () {
+            $("#evisu-cities").slideUp();
+            $("#evisu-district").slideUp();
+        });
+
+        var ua = navigator.userAgent.toLowerCase();
+        if(/safari/.test(ua) && !/chrome/.test(ua) && !/baidu/.test(ua) && !/qq/.test(ua)){
+            $(".map-wrapper").addClass(" safari-browser");
+        }
+
+
+        initMap();
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map-layout'), {
+                zoom: 10,
+                mapTypeControl: false,
+                streetViewControl:false,
+                gestureHandling: 'cooperative',
+                center: {lat: 22.545459, lng: 114.11728}
+
+            });
+
+            //active nearby function
+            window.nearby = true;
+            var  klasse_icon = 'https://k14.bcnetcom.com/pub/static/version1557393098/frontend/Bcn/default/en_US/images/marker_icon.png',
+                 selected_klasse_icon = 'https://k14.bcnetcom.com/pub/static/version1557393098/frontend/Bcn/default/en_US/images/marker_selected_icon.png';
+
+
+            var beachMarker = new google.maps.Marker({
+                position: {lat: 22.545459, lng: 114.11728},
+                map: map,
+            });
+
+
+            allTags = renderMakers(map,klasse_icon,selected_klasse_icon);
+            window.tags = allTags;
+
+
+            //  select city
+            $(".city.filter-item").on("click",function (e) {
+                _selectedCity(e,allTags,map);
+            });
+
+            // select district
+            $(".district.filter-item").on("click",function (e){
+                _selectDistrict(e,allTags,map);
+            });
+
+
+            //left panel click
+            window.activeIdentify = "";
+            $("#result-store-list").on("click","li",function (e) {
+
+                var liTarget = e.target,
+                    idenify = $(this).attr("data-idenify");
+
+                $("#result-store-list li").removeClass("active");
+                $(this).addClass("active");
+
+                if(!window.activeIdentify=="" ){
+                    allTags[window.activeIdentify].setIcon(klasse_icon);
+                }
+                window.activeIdentify  = idenify;
+                allTags[idenify].setIcon(selected_klasse_icon);
+
+                allTags[idenify].setVisible(true);
+                allTags[idenify].setAnimation(google.maps.Animation.BOUNCE);
+
+
+                setTimeout(function () {
+                    allTags[idenify].setAnimation(null);
+                },2000);
+                map.setZoom(12);
+                map.panTo(allTags[idenify].getPosition());
+
+            });
+
+            //global search
+            $(".clear-search a").on("click",function () {
+                $(".search-wrapper input").val("");
+            });
+
+            $(".search-wrapper button").on("click",function () {
+                searchAll(allTags,map);
+            });
+
+            // nearby
+            // related with  moveend zoomend
+            $("#map-panel-nearby-content button").on("click",function () {
+                searchNearby(allTags,map);
+            });
+
+
+
+            map.addListener("bounds_changed",function () {
+                mapMove(allTags,map);
+                // $(".map-wrapper").removeClass(" active");
+            });
+
+
+            // direction-line
+            $("#result-store-list").on("click","#direction-line",function (e) {
+
+                var  directTo = $(this).parents("li").attr("data-idenify");
+
+                var webMapUrl ="https://www.google.com/maps/search/";
+
+
+                $("#web-url-form").attr("action",webMapUrl);
+                $("input[name='query']").val(allTags[directTo].info.lat+","+allTags[directTo].info.lng);
+                $("#web-url-form")[0].submit();
+
+            });
+
+
+            // 手机 移动 active tag 到中心
+            $(".panel-ctrl").on("click",function (e) {
+                $(".map-wrapper").toggleClass(" active");
+                if(window.activeIdentify!=""){
+                    setTimeout(function(){
+                        map.panTo(allTags[window.activeIdentify].getPosition());
+                    }, 700);
+                }
+            });
+            
+            google.maps.event.addListener(map,"dragstart",function(event){
+			     $(".map-wrapper").removeClass(" active");
+			});
+
+        }
+
+        // marker
+        function renderMakers(map,klasseicon,selectedicon) {
+
+
+            var tagContainer = {},
+                klasse_icon = klasseicon,
+                selected_klasse_icon = selectedicon;
+            for(store in allStores){
+                for(var i=0;i<allStores[store].length;i++){
+
+                    var klasseTag = new google.maps.Marker({
+                        position: {
+                            lat: Number(allStores[store][i].latitude),
+                            lng:Number(allStores[store][i].longitude)
+                        },
+                        map: map,
+                        icon: klasse_icon,
+                        info:{
+                            storeId:allStores[store][i].identifier,
+                            storeName:allStores[store][i].name,
+                            LocationName:allStores[store][i].location_name,
+                            storeAddress:allStores[store][i].store_address,
+                            storePhone:allStores[store][i].storelocator_phone,
+                            lng:allStores[store][i].longitude,
+                            lat:allStores[store][i].latitude,
+                            identifier:allStores[store][i].identifier
+                        }
+
+                    });
+                    // attachSecretMessage(marker, secretMessages[i]);
+
+                    tagContainer[allStores[store][i].identifier] = klasseTag;
+
+                    klasseTag.setTitle(allStores[store][i].name);
+
+                    klasseTag.addListener('click', function() {
+                        map.setZoom(12);
+                        map.panTo(this.getPosition());
+
+                        if(!window.activeIdentify=="" ){
+                            allTags[window.activeIdentify].setIcon(klasse_icon);
+                        }
+                        window.activeIdentify  = this.info.identifier;
+                        this.setIcon(selected_klasse_icon);
+                        this.setAnimation(google.maps.Animation.BOUNCE);
+
+                        var markerSelf = this;
+                           $(".map-wrapper").addClass(" active");
+                        setTimeout(function () {
+                            markerSelf.setAnimation(null);
+                        },2000);
+                    });
+                }
+            }
+
+            return tagContainer;
+        }
+
+
+        function(source,resultString){
+        	
+            resultString+="<li data-idenify='"+source.identifier+"'><div>"
+                        +"<h4>"+source.name+"</h4>"
+                        +"<div class='store-address'>"+source.store_address+"</div>"
+                        +"<div class='store-location-name'>"+source.location_name+"</div>"
+                        +"<div class='store-tel'>"+source.storelocator_phone +"</div>"
+                        +"<div class='direct-line'><span id='direction-line'>direction</span></div>"
+                        +"</div></li>";
+        }
+        //  select city
+        function _selectedCity(e,allTags,map){
+
+            window.nearby = false;
+            $("#evisu-cities").slideToggle();
+            $("#evisu-district").slideUp();
+            e.stopPropagation();
+            var target = e.target;
+            var storeList = '',
+                nativeDistrict="";
+            if($(target).attr("data-href")=="allstores"){
+                for(districtAll in allStores){
+                    for(var i=0;i<allStores[districtAll].length;i++){
+                        storeList+="<li data-idenify='"+allStores[districtAll][i].identifier+"'><div>"
+                            +"<h4>"+allStores[districtAll][i].name+"</h4>"
+                            +"<div class='store-address'>"+allStores[districtAll][i].store_address+"</div>"
+                            +"<div class='store-location-name'>"+allStores[districtAll][i].location_name+"</div>"
+                            +"<div class='store-tel'>"+allStores[districtAll][i].storelocator_phone +"</div>"
+                            +"<div class='direct-line'><span id='direction-line'>direction</span></div>"
+                            +"</div></li>";
+
+                        var identify = allStores[districtAll][i].identifier;
+                        allTags[identify].setVisible(true);
+                    }
+                }
+
+                $("#result-store-list").html(storeList);
+                $("#open-cities").text("All Stores");
+                $(".district.filter-item").hide();
+
+            } else if(target.nodeName=="LI"){
+
+                var targetCity =  $(target).attr("data-href");
+                window.selectCity = targetCity;
+                for(district in allLocations[targetCity].children){
+                    if(allStores[district]==undefined){
+                        continue;
+                    }
+                    for(var i=0;i<allStores[district].length;i++){
+                        var identify = allStores[district][i].identifier;
+                        allTags[identify].setVisible(true);
+
+                        storeList+="<li data-idenify='"+allStores[district][i].identifier+"'><div>"
+                            +"<h4>"+allStores[district][i].name+"</h4>"
+                            +"<div class='store-address'>"+allStores[district][i].store_address+"</div>"
+                            +"<div class='store-location-name'>"+allStores[district][i].location_name+"</div>"
+                            +"<div class='store-tel'>"+allStores[district][i].storelocator_phone +"</div>"
+                            +"<div class='direct-line'><span id='direction-line'>direction</span></div>"
+                            +"</div></li>";
+                    }
+                    nativeDistrict+="<li data-href='"+district+"'>"+allLocations[targetCity].children[district].name+"</li>"
+                }
+
+                // 隐藏不在该市范围的标签
+                for(city in allLocations){
+                    if(city == targetCity){
+                        continue;
+                    }
+                    for(district in allLocations[city].children){
+                        if(allStores[district]==undefined){
+                            continue;
+                        }
+                        for(var i=0;i<allStores[district].length;i++){
+                            var identify = allStores[district][i].identifier;
+                            allTags[identify].setVisible(false);
+                        }
+                    }
+                }
+
+                $("#result-store-list").html(storeList);
+                $("#evisu-district").html(nativeDistrict);
+                $("#open-cities").text($(target).text());
+                $("#open-district").text("Cities");
+                $(".district.filter-item").show();
+            }
+        }
+
+        // select district
+        function _selectDistrict(e,allTags,map){
+            window.nearby = false;
+            $("#evisu-district").slideToggle();
+            $("#evisu-cities").slideUp();
+            e.stopPropagation();
+            var target = e.target;
+            var storeList = '';
+            if(target.nodeName=="LI"){
+                var targetDistrict =  $(target).attr("data-href");
+                for(var i=0;i<allStores[targetDistrict].length;i++){
+                    storeList+="<li data-idenify='"+allStores[targetDistrict][i].identifier+"'><div>"
+                        +"<h4>"+allStores[targetDistrict][i].name+"</h4>"
+                        +"<div class='store-address'>"+allStores[targetDistrict][i].store_address+"</div>"
+                        +"<div class='store-location-name'>"+allStores[targetDistrict][i].location_name+"</div>"
+                        +"<div class='store-tel'>"+allStores[targetDistrict][i].storelocator_phone +"</div>"
+                        +"<div class='direct-line'><span id='direction-line'>direction</span></div>"
+                        +"</div></li>";
+
+                    var identify = allStores[targetDistrict][i].identifier;
+                    allTags[identify].setVisible(true);
+                }
+
+                $("#result-store-list").html(storeList);
+
+
+                var selectCity =  window.selectCity;
+                //隐藏不在范围
+                for(district in allLocations[selectCity].children){
+                    if(allStores[district]==undefined || district== targetDistrict){
+                        continue;
+                    }
+                    for(var i=0;i<allStores[district].length;i++){
+                        var identify = allStores[district][i].identifier;
+
+                        allTags[identify].open = false;
+                        allTags[identify].setVisible(false);
+
+
+                    }
+                }
+                $("#open-district").text($(target).text());
+            }
+        }
+
+        //global search
+        function searchAll(allTags,map){
+
+            window.nearby = false;
+           var searchStoreName = false,
+               searchStoreAddress = false,
+               searchStoreLocationName = false;
+
+            var search = $(".search-wrapper input").val().toLowerCase(),
+                storeList="",
+                regex = new RegExp(search),
+                empty = true,
+                resultIdentifyString = '';
+
+            for(district in allStores){
+                for(var i=0;i<allStores[district].length;i++){
+                     identify = allStores[district][i].identifier;
+
+                    searchStoreName = !allStores[district][i].name ? false :regex.test(allStores[district][i].name.toLowerCase());
+                    searchStoreAddress = !allStores[district][i].store_address ? false :regex.test(allStores[district][i].store_address.toLowerCase());
+                    searchStoreLocationName = !allStores[district][i].location_name ? false :regex.test(allStores[district][i].location_name.toLowerCase());
+
+
+                    if(searchStoreName || searchStoreAddress || searchStoreLocationName){
+                        storeList+="<li data-idenify='"+allStores[district][i].identifier+"'><div>"
+                            +"<h4>"+allStores[district][i].name+"</h4>"
+                            +"<div class='store-address'>"+allStores[district][i].store_address+"</div>"
+                            +"<div class='store-location-name'>"+allStores[district][i].location_name+"</div>"
+
+                            +"<div class='store-tel'>"+allStores[district][i].storelocator_phone +"</div>"
+                            +"<div class='direct-line'><span id='direction-line'>direction</span></div>"
+                            +"</div></li>";
+                        empty = false;
+
+
+                        allTags[identify].setVisible(true);
+                        resultIdentifyString+="$" +identify+ "$";
+                    }else{
+
+                        allTags[identify].setVisible(false);
+                    }
+                }
+            }
+
+            if(empty){
+                storeList="<li><h4>not store catch your search</h4></li>";
+            }
+            $("#result-store-list").html(storeList);
+        }
+
+        //nearby
+        function searchNearby(allTags,map){
+            window.nearby = true;
+            // Try HTML5 geolocation.
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+
+
+                    infoWindow.setPosition(pos);
+                    // infoWindow.setContent('Location found.');
+                    // infoWindow.open(map);
+                    map.setCenter(pos);
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
+
+        // map move
+        function mapMove(allTags,map){
+            $("#result-store-list li").removeClass("active");
+            if(window.activeIdentify!=""){
+                $("li[data-idenify='"+window.activeIdentify+"']").addClass("active");
+            }
+            if(!window.nearby){
+                return;
+            }
+            var bs = map.getBounds();   //获取可视区域
+            var lats = bs.na;
+            var lngs = bs.ia;
+            var swLng = lngs.j ,//西南
+                swLat = lats.j ,
+                neLng = lngs.l ,//东北
+                neLat = lats.l;
+
+            var storeList='';
+            for(tag in allTags){
+                var lng = allTags[tag].info.lng,
+                    lat =  allTags[tag].info.lat;
+                if(lng>swLng && lng<neLng && lat>swLat && lat<neLat){
+                    storeList+="<li data-idenify='"+allTags[tag].info.storeId+"'><div>"
+                        +"<h4>"+allTags[tag].info.storeName+"</h4>"
+                        +"<div class='store-address'>"+allTags[tag].info.storeAddress+"</div>"
+                        +"<div class='store-location-name'>"+allTags[tag].info.LocationName +"</div>"
+                        +"<div class='store-tel'>"+allTags[tag].info.storePhone +"</div>"
+                        +"<div class='direct-line'><span id='direction-line'>direction</span></div>"
+                        +"</div></li>";
+                    allTags[tag].setVisible(true);
+                }else{
+                    allTags[tag].setVisible(false);
+
+                }
+            }
+
+            $("#result-store-list").html(storeList);
+            $("#result-store-list li").removeClass("active");
+            if(window.activeIdentify!=""){
+                $("li[data-idenify='"+window.activeIdentify+"']").addClass("active");
+            }
+        }
+    });
+
+
+</script>
+
+
+		
+		
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<img src="images/prototype/原型-原型链-1.png" alt="" />
+		
+		
+		<script type="text/javascript">
+			
+			Person.prototype.lastName = "bv";
+			function Person(){
+				this.lastName = "dv";
+			}
+			
+			var p1 = new Person();
+			    p1.lastName //dv  先找自己，没有找父级， 即原型链
+			    p1.lastName = "mv";// 可以修改自己的，但是不能修改原型
+			    
+             //    修改原型 Person.prototype.lastName = "pv";
+//            delete p1.lastName;//true  删除自己，不能删除原型的
+              
+              p1.constructor //function Person(){
+//				this.lastName = "dv";
+//			}
+
+//Person.prototype   constructor ———proto__
+		</script>
+	</body>
+</html>

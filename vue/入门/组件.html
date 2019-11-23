@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件</title>
+	</head>
+	<body>
+		、<div id='app'>
+			<component-name></component-name>
+			
+			<pro v-for="item in groceryList" v-bind:todo="item" v-bin:key="item.id"></pro>
+		</div>
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<script>
+			
+			Vue.component("component-name",{
+				template:"<li> this is component !</li>"
+			})
+			
+			
+			Vue.component('pro',{
+				props:['todo'],
+				template:'<li> {{ todo.text }} </li>'
+			})
+			
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					message:"here",
+				    groceryList: [
+				      { id: 0, text: '蔬菜' },
+				      { id: 1, text: '奶酪' },
+				      { id: 2, text: '随便其它什么人吃的东西' }
+				    ]
+			  }
+				
+			})
+		</script>
+	</body>
+</html>

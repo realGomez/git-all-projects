@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<div id="app">
+			<div v-if="awesome"> v-if</div>
+			<div v-else-if="awesome">v-else-if</div>
+			<div v-else="awesome"> v-else</div>
+			<div></div>
+			
+			
+			<template v-if="ok">
+			  <h1>Title</h1>
+			  <p>Paragraph 1</p>
+			  <p>Paragraph 2</p>
+			</template>
+		</div>
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	    <script>
+	    	var vm = new Vue({
+	    		el:"#app",
+	    		data:{
+	    			awesome:false,
+	    			ok:true
+	    		}
+	    	})
+	    	
+	    	
+	    </script>
+	</body>
+</html>

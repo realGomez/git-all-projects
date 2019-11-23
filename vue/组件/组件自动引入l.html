@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+		
+		</div>
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+		<script>
+			
+			Vue.component('custom-template',{
+				
+				template:`
+				 <div>template</div>					
+				`
+			})
+			
+			
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					searchText:'u'
+				},
+				template:"<custom-template/>"
+			})
+		</script>
+	</body>
+</html>

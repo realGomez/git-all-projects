@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<div id="app">
+			
+			<base-layout>
+			<template name="header">
+				<h1>header</h1>
+			</template>
+			
+			
+			<p>not in template</p>
+			<template naem="footer">
+				
+				<footer>
+					footer
+				</footer>
+			</template>
+		</base-layout>
+		</div>
+		
+		
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+		<script>
+			
+			
+			
+		Vue.component('base-layout',{
+			template:`
+			  <div class="wrapper">
+			      <header>
+			       <slot name="header"></slot>
+			      </header>
+			      
+                   <main>
+                    <slot></slot>
+                   
+                   </main>
+                   <footer>
+                     <slot name="footer">
+                     
+                    
+                     </slot>
+                   </footer>
+               </div>
+			`
+		})
+			 var vm = new Vue({
+			 	el:'#app',
+			 	data:{
+			 		
+			 	}
+			 })
+		</script>
+	</body>
+</html>
