@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式</title>
+</head>
+<body>
+
+
+<pre>
+    正则 test()
+    字符串 match()
+
+ var reg1 = /abc/;
+    var str1 = "abcd";
+    console.log(reg1.test(str1));
+    console.log(str1.match(reg1));
+
+    var reg2 = /abc/i;  // i ignore case
+    var str2 = "aBcd";
+
+    console.log(reg2.test(str2));
+
+
+    var reg3 = /ab/g;   // g 全局多次匹配
+    var str3 = "abcabcabc";
+    console.log(str3.match(reg3));
+
+    var reg4 = /^ab/g;
+    var str4 = 'abcbabcnnab';
+    console.log(str4.match(reg4));
+
+    var reg5 = /^ab/mg;  //多行匹配  \n 换行
+    var str5 = 'abcb\nabcnn\nab';
+    console.log(str5.match(reg5));
+</pre>
+
+<script>
+
+    var reg1 = /abc/;
+    var str1 = "abcd";
+    console.log(reg1.test(str1));
+    console.log(str1.match(reg1));
+
+    var reg2 = /abc/i;  // i ignore case
+    var str2 = "aBcd";
+
+    console.log(reg2.test(str2));
+
+
+    var reg3 = /ab/g;   // g 全局多次匹配
+    var str3 = "abcabcabc";
+    console.log(str3.match(reg3));
+
+    var reg4 = /^ab/g;
+    var str4 = 'abcbabcnnab';
+    console.log(str4.match(reg4));
+
+    var reg5 = /^ab/mg;  //多行匹配  \n 换行
+    var str5 = 'abcb\nabcnn\nab';
+    console.log(str5.match(reg5));
+
+</script>
+</body>
+</html>

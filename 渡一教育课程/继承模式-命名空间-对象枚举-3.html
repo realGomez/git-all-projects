@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承模式-命名空间-对象枚举-3</title>
+</head>
+<body>
+
+
+<pre>
+
+    区别数组对象三种方法
+
+    constructor  instanceof  Object.prototype.toString.call()
+
+</pre>
+
+<img src="images\继承模式-命名空间-对象枚举\继承模式-命名空间-对象枚举-3.png" alt="">
+
+
+<script>
+
+
+
+  console.log(Object.prototype.toString.call([]));
+  console.log(Object.prototype.toString.call({}));
+
+  var arr = [];
+  var obj = {};
+
+  console.log(arr.constructor);
+  console.log(obj.constructor);
+
+
+  console.log(arr instanceof Array);
+  console.log(obj instanceof Object);
+
+
+
+
+
+</script>
+
+</body>
+</html>

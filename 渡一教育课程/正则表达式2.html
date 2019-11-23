@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式</title>
+</head>
+<body>
+
+
+<pre>
+    正则 test()
+    字符串 match()
+
+
+</pre>
+
+<script>
+
+    // [] [0-9].... 表达式中任意一个
+
+    var reg1 = /[ab][cd][d]/g;
+    var str1 = "abcd";
+
+    console.log(str1.match(reg1));   //bcd
+
+    var reg2 = /(bcd||dfg)[0-9]/g;  //(或)
+    var str2 = "dfg4";
+     console.log(str2.match(reg2));
+
+
+
+     var reg3 = /^abc$/;
+
+     var str4 = "abc";
+     var str5 = "abcabc";
+
+</script>
+</body>
+</html>

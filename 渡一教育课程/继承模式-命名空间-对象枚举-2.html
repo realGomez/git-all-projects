@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<img src="images\继承模式-命名空间-对象枚举\继承模式-命名空间-对象枚举-2.png" alt="">
+
+
+<script>
+
+    var obj = {
+        name:'gomez',
+        age:27,
+        sex:'male',
+        __proto__:{
+            lastName:'wong'
+        }
+    };
+
+
+    var key;
+    for(key in obj){
+        console.log(obj.key);
+    }
+
+
+     console.log('name' in obj);
+    console.log(obj.hasOwnProperty('name'));
+
+
+
+    var prop;
+    for(prop in obj){
+        // console.log(obj[prop]);
+        if(obj.hasOwnProperty(prop)){
+            console.log(obj[prop]);
+
+        }
+    }
+
+
+
+
+</script>
+
+</body>
+</html>

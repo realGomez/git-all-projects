@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json-异步加载-时间线-上-js时间线.</title>
+</head>
+<body>
+
+
+<img src="images/json-异步加载-时间线/json-异步加载-时间线-上-js时间线-2.png" alt="">
+<pre>
+
+
+
+
+IE的 script 元素支持onreadystatechange事件，不支持onload事件。  IE10-11 元素 不支持onreadystatechange事件 (document支持哦哦)
+
+FF的script 元素不支持onreadystatechange事件，只支持onload事件。  (document支持哦哦)
+
+
+console.log(document.readyState);
+
+
+   document.onreadystatechange = function () {
+       console.log(document.readyState);
+
+   }
+
+
+
+</pre>
+
+
+<script>
+
+   console.log(document.readyState);
+
+
+   document.onreadystatechange = function () {
+       console.log(document.readyState);
+
+   };
+
+
+   // document.onaddEventListener  不能用on
+   document.addEventListener('DOMContentLoaded',function () {
+        console.log("DOMContentLoaded");
+   })
+
+
+</script>
+
+
+
+</body>
+</html>
