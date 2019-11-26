@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组-数组去重</title>
+</head>
+<body>
+
+
+
+<img src="images/数组-类数组/type.png" alt="">
+
+<img src="images/数组-类数组/数组-类数组-数组去重.png" alt="">
+
+<script>
+
+    var arr = [1,2,3,4,2,43,1,4,5,2];
+
+
+    var emptyArr = [];
+
+   var newArr = arr.filter(function (value,index) {
+       if(emptyArr.indexOf(value)==-1){
+           emptyArr.push(value);
+       }
+       return emptyArr.indexOf(value) == index;
+    })
+
+
+
+</script>
+
+</body>
+</html>

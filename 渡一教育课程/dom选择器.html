@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择器</title>
+</head>
+<body>
+
+
+<img src="images/DOM/DOM树.png" alt="">
+<img src="images/DOM/DOM树构造函数.png" alt="">
+<img src="images/DOM/DOM树原型.png" alt="">
+<img src="images/DOM/DOM树方法定义.png" alt="">
+
+<pre>
+   document.querySelector('div'); //不是实时
+
+  Document - XMLDocument HTMLDocument
+
+    HTMLDocument.prototype = {
+
+
+       __proto__:Document.prototype
+    }
+
+     document.prototype = {
+
+       __proto__:HTMLDocument.prototype
+    }
+
+
+    HTMLDocument.prototype -> document的原型
+
+</pre>
+
+
+
+
+
+<script>
+
+
+    document.querySelector('div'); //不是实时
+
+
+    Document.prototype.abc = "abc";
+
+
+    console.log(document.abc);
+
+
+    // document.documentElement  -> html
+
+
+</script>
+
+</body>
+</html>
