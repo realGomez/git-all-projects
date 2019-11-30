@@ -1,7 +1,10 @@
 <template>
     <div id="add-blog" v-theme:border="'gomez'">
         <h1>博客列表</h1>
-         <div class="item" v-for="blog in blogs" v-bind:key="blog.index">
+
+        <input type="text" v-model="search">
+
+         <div class="item" v-for="blog in filterBlogs" v-bind:key="blog.index">
              <h1 v-rainbow>{{blog.title | to-uppercase}}</h1>
               <div>{{blog.body | snippet}}</div>
          </div>
@@ -13,7 +16,8 @@
         name: "addBlog",
         data() {
             return {
-                blogs:[]
+                blogs:[],
+                search:''
             }
         },
         created(){
@@ -42,6 +46,44 @@
 
             })
 
+        },
+        computed:{
+            filterBlogs:function () {
+                return this.blogs.filter( (blog) =>{
+                    return blog.title.match(this.search)
+                })
+            }
+        },
+        filters:{
+            // "to-uppercase":function (value) {
+            //    return value.toUpperCase();
+            // }
+            toUppercase(value) {
+                return value.toUpperCase();
+            },
+            snippet (value) {
+                return value.slice(0,100) + '...';
+            }
+        },
+        directives:{
+            rainbow:{
+                bind(el){
+                    el.style.color = "#" + Math.random().toString(16).slice(2,8);
+                }
+            },
+        theme:{
+                bind(el,binding){
+                  if(binding.value=='gomez'){
+                    el.style.backgroundColor = "rgb(241, 241, 241)";
+                  }
+
+                  if(binding.arg == 'border'){
+                      el.style.borderWidth = '2px';
+                      el.style.borderStyle = 'dotted';
+                      el.style.borderColor = 'red';
+                  }
+                }
+            }
         }
     }
 </script>
