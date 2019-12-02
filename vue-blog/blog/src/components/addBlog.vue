@@ -22,7 +22,7 @@
             <div class="field">
                 <label>作者</label>
                 <select v-model="blog.author">
-                    <option v-for="author in blog.authors" v-bind:key="author">
+                    <option v-for="author in authors" v-bind:key="author">
                         {{author}}
                     </option>
                 </select>
@@ -74,23 +74,28 @@
                     title:'',
                     content:'',
                     categories:[],
-                    author:'',
-                    authors:['尤雨溪','戈麦斯'],
+                    author:''
                 },
-                submited:false
-
+                authors:['尤雨溪','戈麦斯'],
+                submited:false,
             }
         },
         methods:{
             post:function () {
 
-                this.$http.post("https://jsonplaceholder.typicode.com/posts",{
-                    title:this.blog.title,
-                    body:this.blog.content,
-                    userId:1
-                }).then(function (data) {
-                    console.log(data);
+                // this.$http.post("https://jsonplaceholder.typicode.com/posts",{
+                //     title:this.blog.title,
+                //     body:this.blog.content,
+                //     userId:1
+                // }).then(function (data) {
+                //     console.log(data);
+                //     this.submited = true;
+                // })
+
+
+                this.$http.post("https://vue-blog-f137d.firebaseio.com/blogs.json",this.blog).then(function () {
                     this.submited = true;
+                    // console.log(data);
                 })
             }
         }

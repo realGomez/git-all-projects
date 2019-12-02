@@ -5,8 +5,11 @@
         <input type="text" v-model="search">
 
          <div class="item" v-for="blog in filterBlogs" v-bind:key="blog.index">
-             <h1 v-rainbow>{{blog.title | to-uppercase}}</h1>
-              <div>{{blog.body | snippet}}</div>
+             <router-link v-bind:to="'/blog/'+blog.id">
+                 <h1 v-rainbow>{{blog.title | to-uppercase}}</h1>
+             </router-link>
+              <!--<div>{{blog.body | snippet}}</div>-->
+             <div>{{blog.content | snippet}}</div>
          </div>
     </div>
 </template>
@@ -39,17 +42,29 @@
             //
             // })
 
-            this.$http.get("./posts.json").then(function (data) {
-                console.log(data);
-                this.blogs = data.body.slice(0,20);
-                console.log(this.blogs);
+            // this.$http.get("./posts.json").then(function (data) {
+            //     console.log(data);
+            //     this.blogs = data.body.slice(0,20);
+            //     console.log(this.blogs);
+            //
+            // })
 
-            })
+            this.$http.get("https://vue-blog-f137d.firebaseio.com/blogs.json").then(function (data) {
+                  return data.json();
+            }).then(function (data) {
+                var blogsArr = [];
+                for(let key in data){
+                    data[key].id = key;
+                    blogsArr.push(data[key]);
+                }
+                this.blogs = blogsArr;
+
+            });
 
         },
         computed:{
             filterBlogs:function () {
-                return this.blogs.filter( (blog) =>{
+                return this.blogs.filter((blog) =>{
                     return blog.title.match(this.search)
                 })
             }
@@ -138,6 +153,11 @@
     .classify li{
         display: inline-block;
         margin-right: 10px;
+    }
+
+    .item a{
+        color: #333;
+        text-decoration: none;
     }
 
 </style>
