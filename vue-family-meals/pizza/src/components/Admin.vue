@@ -6,7 +6,23 @@
 
 <script>
     export default {
-        name: "Admin"
+        name: "Admin",
+        data(){
+            return {
+                name:'k'
+            }
+        },
+        beforeRouteEnter:(to,from,next)=>{
+
+       },beforeRouteLeave:()=>{
+
+            if(conform('leave')==true){
+
+            }else{
+                next(false);
+            }
+        }
+
     }
 </script>
 

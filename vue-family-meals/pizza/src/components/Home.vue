@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-   home
+   <h2>home</h2>
+
+      <button @click="goToMenu">点餐</button>
   </div>
 </template>
 
@@ -10,8 +12,21 @@
 
 export default {
   name: 'home',
-  components: {
-    // HelloWorld
+  methods:{
+      goToMenu:function(){
+          //上一次浏览页面
+          // this.$router.go(-1)
+          // this.$router.replace('/menu');
+
+      //    指定路由名称下
+      //     this.$router.replace({name:'menuLink'});
+
+
+          // this.$router.push({name:'menuLink'});
+          this.$router.push('/menu');
+
+
+      }
   }
 }
 </script>
