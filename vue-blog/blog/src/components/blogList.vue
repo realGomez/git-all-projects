@@ -15,6 +15,7 @@
 </template>
 
 <script>
+    import  axios from 'axios';
     export default {
         name: "addBlog",
         data() {
@@ -49,18 +50,41 @@
             //
             // })
 
-            this.$http.get("https://vue-blog-f137d.firebaseio.com/blogs.json").then(function (data) {
-                  return data.json();
-            }).then(function (data) {
-                var blogsArr = [];
-                for(let key in data){
-                    data[key].id = key;
-                    blogsArr.push(data[key]);
-                }
-                this.blogs = blogsArr;
+            // this.$http.get("https://vue-blog-f137d.firebaseio.com/blogs.json").then(function (data) {
+            //       return data.json();
+            // }).then(function (data) {
+            //     var blogsArr = [];
+            //     for(let key in data){
+            //         data[key].id = key;
+            //         blogsArr.push(data[key]);
+            //     }
+            //     this.blogs = blogsArr;
+            //
+            // });
 
-            });
 
+            this.fetchData();
+
+        },
+        methods:{
+           fetchData:function () {
+               var _this = this;
+
+               // axios.get("https://vue-blog-f137d.firebaseio.com/blogs.json").
+               axios.get("/blogs.json").then(function (data) {
+                   return data.data
+               }).then(function (data) {
+
+
+                   var blogsArr = [];
+                   for(let key in data){
+                       data[key].id = key;
+                       blogsArr.push(data[key]);
+                   }
+                   _this.blogs = blogsArr;
+
+               });
+           }
         },
         computed:{
             filterBlogs:function () {

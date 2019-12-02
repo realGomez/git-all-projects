@@ -2,10 +2,23 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import VueResource from 'vue-resource'
+// import VueResource from 'vue-resource'
+// Vue.use(VueResource)
 
-Vue.use(VueResource)
+//axios 全局配置
+import axios from 'axios';
+axios.defaults.baseURL = "https://vue-blog-f137d.firebaseio.com"
+// axios.defaults.headers.common['Authorization'] = 'Token'
+// axios.defaults.headers.post['Content-Type'] = "application/urlencode"
+// axios.defaults.headers.get['Accepts'] = "application/json"
+
+
 Vue.config.productionTip = false
+
+
+
+
+
 // 全局写法
 // 自定义指令
 // Vue.directive("rainbow",{

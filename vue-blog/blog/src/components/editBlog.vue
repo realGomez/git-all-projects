@@ -1,6 +1,6 @@
 <template>
     <div id="add-blog">
-        <h1>添加博客</h1>
+        <h1>编辑博客</h1>
         <form v-if="!submited">
             <div class="field">
                 <label>标题</label>
@@ -60,56 +60,43 @@
         </div>
 
         <div class="submited-success" v-if="submited">
-            <h1>博客添加成功</h1>
+            <h1>博客修改成功</h1>
         </div>
     </div>
 </template>
 
 <script>
-
     import  axios from 'axios';
     export default {
         name: "addBlog",
         data() {
             return {
-                blog:{
-                    title:'',
-                    content:'',
-                    categories:[],
-                    author:'',
-                    authors:['尤雨溪','戈麦斯'],
-                },
-
+                id:this.$route.params.id,
+                blog:{},
                 submited:false,
             }
         },
         methods:{
             post:function () {
-
-                // this.$http.post("https://jsonplaceholder.typicode.com/posts",{
-                //     title:this.blog.title,
-                //     body:this.blog.content,
-                //     userId:1
-                // }).then(function (data) {
-                //     console.log(data);
-                //     this.submited = true;
-                // })
-
-
-                // this.$http.post("https://vue-blog-f137d.firebaseio.com/blogs.json",this.blog).then(function () {
+                // this.$http.put("https://vue-blog-f137d.firebaseio.com/blogs/"+this.id+'.json',this.blog).then(function () {
                 //     this.submited = true;
                 //     // console.log(data);
                 // })
-
-                // this指向问题  使用中建投函数 或者 var _this = this
-
-                // axios.post("https://vue-blog-f137d.firebaseio.com/blogs.json",this.blog)
-                axios.post("/blogs.json",this.blog).then( (data)=> {
+                // axios.put("https://vue-blog-f137d.firebaseio.com/blogs/
+                axios.put("/blogs/"+this.id+'.json',this.blog).then(()=>{
                     this.submited = true;
-                    console.log(data);
+                    // console.log(data);
                 })
             }
-        }
+        },
+        created(){
+            axios.get("/blogs/"+this.id+'.json').then((data)=> {
+                this.blog = data.data;
+                // console.log(this.blog);
+
+            })
+
+        },
     }
 </script>
 

@@ -9,10 +9,16 @@
                 {{category}}
             </li>
         </ul>
+
+
+        <button @click="deleteCurrent">删除</button>
+        <router-link :to="'/edit/'+id">编辑</router-link>
+
     </div>
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
         name: "blogDetail",
         data() {
@@ -30,11 +36,32 @@
             //
             // })
 
-            this.$http.get("https://vue-blog-f137d.firebaseio.com/blogs/"+this.id+'.json').then(function (data) {
-                this.blog = data.body;
+            // this.$http.get("https://vue-blog-f137d.firebaseio.com/blogs/"+this.id+'.json').then(function (data) {
+            //     this.blog = data.body;
+            //
+            // })
+
+            // axios.get("https://vue-blog-f137d.firebaseio.com/blogs/"+this.id+'.json').
+            axios.get("/blogs/"+this.id+'.json').then( (data) =>{
+                this.blog = data.data;
 
             })
 
+        },
+        methods:{
+            // deleteCurrent:function () {
+            //     this.$http.delete("https://vue-blog-f137d.firebaseio.com/blogs/"+this.id+'.json').then(function () {
+            //
+            //        this.$router.push({path:'/'})
+            //     })
+            // }
+
+            deleteCurrent:function () {
+                axios.delete("/blogs/"+this.id+'.json').then( ()=>{
+
+                    this.$router.push({path:'/'})
+                })
+            }
         }
     }
 </script>
