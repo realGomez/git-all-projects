@@ -2,7 +2,7 @@
   <div class="home">
    <h2>home</h2>
 
-      <button @click="goToMenu">点餐</button>
+      <button class="button" @click="goToMenu">点餐</button>
   </div>
 </template>
 
@@ -30,3 +30,10 @@ export default {
   }
 }
 </script>
+
+
+<style scoped>
+    /*.home{*/
+        /*height: 300vh;*/
+    /*}*/
+</style>

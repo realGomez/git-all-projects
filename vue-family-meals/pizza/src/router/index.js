@@ -7,7 +7,13 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    // component: Home
+      components: {
+         default:Home,
+          'orderingGuide':() => import('../components/about/OrderingGuide.vue'),
+          'history':() => import('../components/about/History.vue'),
+          'delivery':() => import('../components/about/Delivery.vue')
+      }
   },
   // {
   //     path: '/admin',
@@ -75,7 +81,21 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+    // scrollBehavior(){
+      // return {x:0,y:50};
+
+
+      // return {selector:'.button'}
+        // if(savePosition){
+        //     return savePosition;
+        // }else{
+        //     return {x:0,y:200}
+        // }
+
+    // }
+
+
 })
 
 export default router
