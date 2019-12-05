@@ -1,0 +1,17 @@
+npm init  创建package.json才能下载
+
+
+npm install jquery
+npm install jquery --save   记录到pakage.json
+
+npm uninstall jquery
+
+
+nodemon
+
+express
+
+EJS
+
+无法识别外部样式
+

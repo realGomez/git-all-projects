@@ -1,6 +1,6 @@
 <template>
     <div class="app-footer">
-        footer
+      <span class="copyright">Copyright © 2019 戈麦斯</span>  <span class="beian">琼ICP备19004979号</span>
     </div>
 </template>
 
@@ -11,8 +11,8 @@
 </script>
 
 <style scoped>
-
-    .app-footer{
-        margin-left: 100px;
+    .copyright{
+        margin-right: 20px;
     }
+
 </style>

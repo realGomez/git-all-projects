@@ -10,15 +10,16 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="less">
     .app-header{
-        /*text-align: center;*/
+        margin-left: 100px;
+        position: relative;
     }
     .logo{
         display: inline-block;
         font-size: 0;
         position: absolute;
-        top: 0;
+        top: 10px;
         left: 50%;
         transform: translateX(-50%);
     }
