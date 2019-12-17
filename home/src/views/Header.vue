@@ -1,20 +1,33 @@
 <template>
     <div class="app-header">
         <router-link to="/" class="logo"><img src="./../assets/logo.png" alt="."></router-link>
+        <app-menu></app-menu>
     </div>
+
 </template>
 
 <script>
+    import menu from './Menu'
+
     export default {
-        name: "Header"
+        name: "Header",
+        components: {
+            'app-menu':menu,
+        },
+        data(){
+          return{
+
+          }
+        },
+        methods:{
+            handleScroll:function () {
+            }
+        }
     }
 </script>
 
 <style scoped lang="less">
-    .app-header{
-        margin-left: 100px;
-        position: relative;
-    }
+
     .logo{
         display: inline-block;
         font-size: 0;
