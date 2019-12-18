@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+
+<style>
+    canvas{
+       display: block;
+        width: 100%;
+    }
+</style>
+
+
+<body>
+
+  <canvas id="canvas"></canvas>
+
+
+
+
+   <script>
+
+       var cans = document.getElementById("canvas");
+       var ctx = cans.getContext("2d");
+       var cw = cans.width = window.innerWidth;
+       var ch = cans.height = window.innerHeight;
+
+
+
+       function Item() {
+           this.px = parseInt(Math.random()*cw);
+           this.py =parseInt( Math.random()*ch);
+           this.r = 3;
+           this.speedx =  Math.random() >0.5 ? 2:-2;
+           this.speedy = Math.random() >0.5 ? 2:-2;
+           this.expx = 0;
+           this.expy = 0;
+
+
+       }
+
+       var itemArr = [];
+       for(var i=0;i<50;i++){
+           itemArr.push(new Item());
+       }
+
+
+       function draw(){
+           ctx.fillStyle = "rgba(0,0,0,0.1)";
+           ctx.fillStyle = "#fff";
+
+           ctx.fillRect(0,0,cw,ch);
+
+           for(var j=0;j<itemArr.length;j++){
+               var item = itemArr[j];
+
+               if(item.px <=0 || item.px>=cw){
+                   item.speedx= -item.speedx;
+               }
+
+               if(item.py<0 || item.py>=ch){
+                   item.speedy= -item.speedy;
+               }
+               ctx.beginPath();
+               ctx.arc(item.px,item.py,item.r,0,Math.PI*2);
+               ctx.fillStyle = "#426666";
+               ctx.fill();
+
+               item.expx = item.px;
+               item.expy = item.py;
+
+               item.px += item.speedx;
+               item.py += item.speedy;
+               ctx.closePath();
+           }
+       }
+       function drawLine(){
+           for(var k=0;k<itemArr.length;k++){
+               var item1 = itemArr[k];
+
+               for(var l=0;l<itemArr.length;l++){
+
+
+                   var item2 = itemArr[l];
+                   // console.log(item1,item2);
+
+
+                   console.log(item1.expx,item1.px,item2.expy,item2.py);
+                   var d = Math.sqrt(Math.pow(item1.expx - item2.expx,2) + Math.pow(item1.expy - item2.expy,2));
+
+                   // console.log('-----',d);
+                   if(d<100){
+                       // console.log('--',d);
+
+                       ctx.beginPath();
+                       ctx.moveTo(item1.expx,item1.expy);
+                       ctx.lineTo(item2.expx,item2.expy);
+                       ctx.strokeStyle = "#426666";
+                       ctx.stroke();
+                       ctx.closePath();
+                   }
+               }
+           }
+
+       }
+
+
+       // draw();
+       // drawLine();
+       setInterval(function (){
+           draw();
+           drawLine();
+       },8000/60)
+
+
+
+
+
+
+
+
+
+
+
+   </script>
+
+</body>
+</html>
