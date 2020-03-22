@@ -6,15 +6,15 @@
         <p>正好回海南工作两个月，约上三五个老同学，去解放西逛街。金棕榈广场非常热闹。这几天天气稍微有点凉，大家开始买冬装。</p>
         <p>金棕榈小吃街尝了几个好多年没有吃过的海南小吃，然后和同学去骑楼老街压马路...</p>
         <div class="container">
-            <img src="../../assets/Haikou/qilou/IMG_2539.JPG" alt="海口骑楼老街" v-theme>
-            <img src="../../assets/Haikou/qilou/IMG_2541.JPG" alt="海口骑楼老街" v-theme>
-            <img src="../../assets/Haikou/qilou/IMG_2542.JPG" alt="海口骑楼老街" v-theme>
-            <img src="../../assets/Haikou/qilou/IMG_2544.JPG" alt="海口骑楼老街" v-theme>
-            <img src="../../assets/Haikou/qilou/IMG_2545.JPG" alt="海口骑楼老街" v-theme>
-            <img src="../../assets/Haikou/qilou/IMG_2546.JPG" alt="海口骑楼老街" v-theme>
-            <img src="../../assets/Haikou/qilou/IMG_2547.JPG" alt="海口骑楼老街" v-theme>
-            <img src="../../assets/Haikou/qilou/IMG_2549.JPG" alt="海口骑楼老街" v-theme>
-            <img src="../../assets/Haikou/qilou/IMG_2550.JPG" alt="海口骑楼老街" v-theme>
+            <img src="../../assets/images/haikou/qilou/IMG_2539.JPG" alt="海口骑楼老街" v-theme>
+            <img src="../../assets/images/haikou/qilou/IMG_2541.JPG" alt="海口骑楼老街" v-theme>
+            <img src="../../assets/images/haikou/qilou/IMG_2542.JPG" alt="海口骑楼老街" v-theme>
+            <img src="../../assets/images/haikou/qilou/IMG_2544.JPG" alt="海口骑楼老街" v-theme>
+            <img src="../../assets/images/haikou/qilou/IMG_2545.JPG" alt="海口骑楼老街" v-theme>
+            <img src="../../assets/images/haikou/qilou/IMG_2546.JPG" alt="海口骑楼老街" v-theme>
+            <img src="../../assets/images/haikou/qilou/IMG_2547.JPG" alt="海口骑楼老街" v-theme>
+            <img src="../../assets/images/haikou/qilou/IMG_2549.JPG" alt="海口骑楼老街" v-theme>
+            <img src="../../assets/images/haikou/qilou/IMG_2550.JPG" alt="海口骑楼老街" v-theme>
         </div>
 
         <p style="text-align: right">2019.12.7</p>

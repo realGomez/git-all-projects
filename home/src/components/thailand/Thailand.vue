@@ -51,7 +51,6 @@
             <img src="../../assets/images/thailand/bangkok/IMG_2185.JPG" alt="泰国旅游">
             <img src="../../assets/images/thailand/bangkok/IMG_2186.JPG" alt="泰国旅游">
             <img src="../../assets/images/thailand/bangkok/IMG_2187.JPG" alt="泰国旅游">
-            <img src="../../assets/images/thailand/bangkok/IMG_2188.JPG" alt="泰国旅游">
             <img src="../../assets/images/thailand/bangkok/IMG_2189.JPG" alt="泰国旅游">
             <img src="../../assets/images/thailand/bangkok/IMG_2190.JPG" alt="泰国旅游">
             <img src="../../assets/images/thailand/bangkok/IMG_2191.JPG" alt="泰国旅游">

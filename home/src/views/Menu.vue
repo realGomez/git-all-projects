@@ -14,7 +14,7 @@
 
                     <ul>
                         <li><strong >旅行</strong></li>
-                        <li><router-link to="/" >海口骑楼老街</router-link></li>
+                        <li><router-link to="/qilou" >海口骑楼老街</router-link></li>
                         <li><router-link to="/thai">泰国行</router-link></li>
 
                     </ul>
