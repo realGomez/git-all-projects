@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+        <div class="file-box">
+            <img id="jpreview" />
+            <input type="text" id="imgfield" class="txt" placeholder="预览">
+            <input type="file" name="file" id = "input_file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" onchange="imgPreview(this)" />
+        </div>
+
+        <script>
+            function imgPreview(fileDom) {
+                //判断是否支持FileReader
+                var file = fileDom.files[0];
+                if(window.FileReader) {
+                    var reader = new FileReader();
+                } else {
+                    alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+                }
+
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    console.log("load");
+                    var img = document.getElementById("jpreview");
+                    // img.src = e.target.result;
+                     img.src = e.target.result;
+                    // / e.target == this
+
+                    console.log(e.target.result);
+                }
+            }
+        </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .img-box{
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="control" id="upload-box">
+    <div class="file-box">
+        <span class="delete" onclick="deleteElem(this)">delete</span>
+        <input id="file" class="file-path" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"  onchange="changepic(this)" type="file">
+        <div  class="img-box"></div>
+    </div>
+</div>
+
+<script>
+    function changepic(obj) {
+        var newsrc=getObjectURL(obj.files[0]);
+        console.log(obj,obj.nextElementSibling);
+        obj.nextElementSibling.style.backgroundImage = "url("+newsrc+")";
+        addBox();
+    }
+
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+
+    function addBox(){
+        var div =  document.createElement("div");
+        div.className = "file-box";
+        div.innerHTML =  '<span class="delete" onclick="deleteElem(this)" style="display: none">delete</span><input id="file" class="file-path" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"  onchange="changepic(this)" type="file">'+
+            '<div  class="img-box"></div>';
+
+
+        document.getElementById("upload-box").appendChild(div);
+    }
+    function deleteElem(elem) {
+
+        document.getElementById("upload-box").removeChild(elem.parentNode)
+    }
+</script>
+</body>
+</html>
