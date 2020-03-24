@@ -1,10 +1,10 @@
 <template>
-  <div id="app" v-bind:class="{ 'menu-fixed':menuFixed,'header-fixed':headerFixed,inited:init }">
+  <div id="app" v-bind:class="{ 'menu-fixed':menuFixed,'header-fixed':headerFixed,inited:init,loading:loading }">
 
     <header>
       <app-header></app-header>
     </header>
-    <main>
+    <main ref="main">
       <router-view/>
 
     </main>
@@ -46,10 +46,8 @@
                         var d = newScrollT - scrollT;
 
                         if(d>0){
-                            console.log("bottom");
                             _this.headerFixed = false;
                         }else{
-                            console.log("top");
                             _this.headerFixed = true;
 
                         }
@@ -61,16 +59,20 @@
                 }
             });
 
-            // 用$on事件来接收参数
             Bus.$on('menuFixed', (data) => {
                 this.menuFixed = data;
-            })
+            });
+
+            Bus.$on('loading', (data) => {
+               this.loading =data;
+            });
         },
         data(){
             return {
                 headerFixed:false,
                 init:false,
-                menuFixed:false
+                menuFixed:false,
+                loading:false
             }
         },
         methods:{
@@ -88,6 +90,16 @@
   #app{
     &.menu-fixed{
       position: fixed;
+    }
+    &.loading:before{
+      display: block;
+      content: "";
+      height: 100vh;
+      width: 100%;
+      position: fixed;
+      background: url("./assets/loader.gif") center center no-repeat;
+      background-color: #fff;
+
     }
   }
 

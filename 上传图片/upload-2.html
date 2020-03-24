@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+//filereader 的方法
+<form action="" enctype="multipart/form-data">
+    <input id="file" class="filepath" onchange="changepic(this)" type="file"><br>
+    <img src="" id="show" width="200">
+</form>
+<script>
+    function changepic() {
+        var reads= new FileReader();
+        f=document.getElementById('file').files[0];
+        reads.readAsDataURL(f);
+        reads.οnlοad=function (e) {
+            document.getElementById('show').src=this.result;
+        };
+    }
+</script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 <template>
-  <div class="home">
-    home
+  <div class="home" >
+   斤斤计较
+
   </div>
 </template>
 
@@ -17,6 +18,19 @@ export default {
           { name: 'keywords', content: '海南，网页开发,网站搭建' }
       ]
   },
+    mounted(){
+
+      // console.log(this.$root);
+
+    }
 
 }
 </script>
+
+
+<style scoped>
+  canvas{
+    display: block;
+    width: 100%;
+  }
+</style>
