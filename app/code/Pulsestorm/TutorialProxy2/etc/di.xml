@@ -1,0 +1,23 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="Pulsestorm\TutorialProxy2TestbedCommand" xsi:type="object">Pulsestorm\TutorialProxy2\Command\Testbed</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Pulsestorm\TutorialProxy1\Model\Example">
+        <arguments>
+            <argument name="slow" xsi:type="object">Pulsestorm\TutorialProxy1\Model\SlowLoading\Proxy</argument>
+        </arguments>
+    </type>
+    <!-- Proxies as preferences won't work -->
+    <!-- 
+    <preference 
+        for="Pulsestorm\TutorialProxy1\Model\SlowLoading" 
+        type="Pulsestorm\TutorialProxy1\Model\SlowLoading\Proxy"
+    />    
+     -->
+     
+</config>

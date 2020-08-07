@@ -1,0 +1,55 @@
+<h1>wedgit / phtml</h1>
+<div></div>
+
+
+<!---->
+<!--<script>-->
+<!--    require(['jquery','ko'],function ($,ko) {-->
+<!--        $(function(){-->
+<!--            viewModel = {-->
+<!--                title:"Hello World",-->
+<!--                content:"So many years of hello world"-->
+<!--            };-->
+<!--            ko.applyBindings(viewModel);-->
+<!--        });-->
+<!--    })-->
+<!---->
+<!--</script>-->
+
+<!--<div id="main">-->
+<!--    <!--    <h1 data-bind="text:title"></h1>-->
+<!--    <p data-bind="text:content"></p>-->
+<!--</div>-->
+
+<div data-bind="scope: 'koexample'">
+    <!-- ko text: firstname --><!-- /ko -->
+    <!-- ko text: lastname --><!-- /ko -->
+    <!-- ko text: fullname --><!-- /ko -->
+    <div data-bind="text: firstname"></div>
+    <div data-bind="text: lastname"></div>
+    <div data-bind="text: fullname"></div>
+
+
+    <div data-bind="text: myTimer"></div>
+
+    <!-- 调用模板 -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+
+</div>
+
+<!--<div data-bind="text: myTimer"></div>-->
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "koexample": {
+                        "component": "Pulsestorm_HelloWorldM/js/koexample",
+                        "template" : "Pulsestorm_HelloWorldM/example",
+                        "param1" : "hello world!"
+                    }
+                }
+            }
+        }
+    }
+</script>

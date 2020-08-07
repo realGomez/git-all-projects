@@ -1,0 +1,25 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="2columns-right">
+    <body>
+        <referenceContainer name="content">
+            <!--<block class="Pulsestorm\HelloWorldMVVM\Block\Hello" name="hello" template="helloworld.phtml"/>-->
+            <block class="Pulsestorm\HelloWorldM\Block\Hello" name="hello.h" template="Pulsestorm_HelloWorldM::wedgit.phtml"/>
+        </referenceContainer>
+
+        <referenceContainer name="content">
+            <!--<block class="Pulsestorm\HelloWorldM\Block\Customer\Lists" before="-" cacheable="false" template="customer/list.phtml">-->
+                <!--<arguments>-->
+                    <!--<argument name="jsLayout" xsi:type="array">-->
+                        <!--<item name="components" xsi:type="array">-->
+                            <!--<item name="customer-list" xsi:type="array">-->
+                                <!--<item name="component" xsi:type="string">Pulsestorm_HelloWorldM/js/view/customer/list</item>-->
+                                <!--<item name="config" xsi:type="array">-->
+                                    <!--<item name="template" xsi:type="string">Pulsestorm_HelloWorldM/customer/list</item>-->
+                                <!--</item>-->
+                            <!--</item>-->
+                        <!--</item>-->
+                    <!--</argument>-->
+                <!--</arguments>-->
+            <!--</block>-->
+        </referenceContainer>
+    </body>
+</page>

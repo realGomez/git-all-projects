@@ -1,0 +1,31 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="testbedCommand" xsi:type="object">Pulsestorm\TutorialObjectManagerArguments\Command\Testbed</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- ... snipped ... -->
+    <type name="Pulsestorm\TutorialObjectManagerArguments\Model\Example">
+        <arguments>
+            <argument name="scaler1" xsi:type="string">bar</argument>
+        </arguments>
+    </type>
+
+
+    <!-- ... snipped ... -->
+    <type name="Pulsestorm\TutorialObjectManagerArguments\Model\Example">
+        <arguments>
+            <argument name="object1" xsi:type="object">Pulsestorm\TutorialObjectManagerArguments\Model\SomethingCompletelyDifferent</argument>
+        </arguments>
+    </type>
+
+
+        <!-- ... snipped ... -->
+        <type name="Pulsestorm\TutorialObjectManagerArguments\Model\Example">
+            <arguments>
+                <argument name="scaler2" xsi:type="const">Magento\Integration\Model\Integration::SETUP_TYPE</argument>
+            </arguments>
+        </type>
+</config>

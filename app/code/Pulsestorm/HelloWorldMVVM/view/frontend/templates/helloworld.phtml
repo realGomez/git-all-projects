@@ -1,0 +1,31 @@
+<h2>HelloWorld</h2>
+<p>Congratulations ! You have created your first Magento Module !</p>
+<p>The block classname is : <?php echo get_class($block) ?></p>
+
+<?php
+
+/**
+ * @var \Mageplaza\HelloWorld\Block\Display $block
+ */
+
+echo $block->sayHello();
+?>
+<h1>我是 hello world ！</h1>
+<table width="600" border="1" cellspacing="0">
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>密码</th>
+        <th>年龄</th>
+        <th>地址</th>
+    </tr>
+    <?php foreach($block->getUserData() as $key=>$val) :?>
+        <tr>
+            <td>00000<?php echo $val['id'];?></td>
+            <td><?php echo $val['username'];?></td>
+            <td><?php echo $val['password'];?></td>
+            <td><?php echo $val['age'];?></td>
+            <td><?php echo $val['address'];?></td>
+        </tr>
+    <?php endforeach;?>
+</table>

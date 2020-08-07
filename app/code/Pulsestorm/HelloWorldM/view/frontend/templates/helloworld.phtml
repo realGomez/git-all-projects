@@ -1,0 +1,119 @@
+
+<h1><?php echo $block->sayHello(); ?></h1>
+
+
+<p>---template--</p>
+<h2>HelloWorld</h2>
+<p>Congratulations ! You have created your first Magento Module !</p>
+<p>The block classname is : <?php echo get_class($block) ?></p>
+<p>---template--</p>
+
+
+
+<h1> Get data from source</h1>
+<table width="600" border="1" cellspacing="0">
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>密码</th>
+        <th>年龄</th>
+        <th>地址</th>
+    </tr>
+    <?php foreach($block->getUserData() as $key=>$val) :?>
+        <tr>
+            <td>00000<?php echo $val['id'];?></td>
+            <td><?php echo $val['username'];?></td>
+            <td><?php echo $val['password'];?></td>
+            <td><?php echo $val['age'];?></td>
+            <td><?php echo $val['address'];?></td>
+        </tr>
+    <?php endforeach;?>
+</table>
+
+
+<style>
+    #element{
+        background: #5188ad;
+    }
+
+    #element .allow{
+        border-bottom: 1px solid #2d2727;
+    }
+    #element [role="tabpanel"]{
+        background: #f3cd46;
+    }
+</style>
+
+<h1>Accordion widget</h1>
+
+<div id="element">
+    <div data-role="collapsible">
+        <div data-role="trigger">
+            <span>Title 1</span>
+        </div>
+    </div>
+    <div data-role="content">Content 1</div>
+
+    <div data-role="collapsible">
+        <div data-role="trigger">
+            <span>Title 2</span>
+        </div>
+    </div>
+    <div data-role="content">Content 2</div>
+
+    <div id="element">
+        <div data-role="trigger">
+            <span>Title 3</span>
+        </div>
+    </div>
+    <div data-role="content">Content 3</div>
+</div>
+
+<h1>collapsible</h1>
+
+<div data-mage-init='{"collapsible":{ "active": false, "animate": 200, "collapsible": true}}'>
+    <div data-role="title">Show hidden</div>
+    <div data-role="content">
+        The Magento collapsible widget converts a header/content pair into an accordion, where the content is collapsed or expanded on the header click.
+        Unlike the accordion widget is that collapsible is initialized for one title/content pair, while accordion can be initialized for a set of title/contents pairs.
+    </div>
+</div>
+<div id="one" class="foo">Hello World</div>
+<div id="two" class="foo">
+    Goodbye World
+</div>
+
+<div data-mage-init='{"Pulsestorm_HelloWorldM/example": {"bv":"data-mage-init"}}'>A single div</div>
+
+<!--<script type="text/x-magento-init">-->
+<!--    {-->
+<!--        "#one": {-->
+<!--            "Pulsestorm_HelloWorldM/example":{"bv":"x-magento-init"}-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/alert',
+        'mage/collapsible',
+        'accordion',
+
+    ], function ($,alert,collapsible) {
+        $("#element").accordion();
+        // alert({
+        //     title: 'Some title',
+        //     content: 'Some content',
+        //     actions: {
+        //         always: function(){}
+        //     }
+        // });
+
+        $("#element2").collapsible();
+
+    });
+</script>
+
+
+
+
