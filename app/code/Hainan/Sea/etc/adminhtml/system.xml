@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="hainan" translate="label" sortOrder="250">
+            <label>Hainan</label>
+        </tab>
+        <section id="blog" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Hainan Settings</label>
+            <tab>hainan</tab>
+            <resource>Hainan_Sea::sea_config</resource>
+            <group id="blog" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Blog Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <comment>To enable for specific store or website</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Blog Meta Title</label>
+                </field>
+                <field id="keywords" translate="label" type="text" sortOrder="9" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Meta Keywords</label>
+                </field>
+                <field id="description" translate="label" type="textarea" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Meta Description</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

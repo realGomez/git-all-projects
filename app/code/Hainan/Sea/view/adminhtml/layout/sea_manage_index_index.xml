@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<body>
+    <referenceBlock name="content">
+        <!--<block  template="manage.phtml" class="Hainan\Sea\Block\Adminhtml\Main" name="sea_manage" />-->
+        <uiComponent name="hainan_simple"/>
+    </referenceBlock>
+</body>
+</page>

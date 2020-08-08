@@ -1,0 +1,42 @@
+<!-- File: app/code/Pulsestorm/MenuTutorial/etc/adminhtml/menu.xml -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Hainan_Sea::sea"
+             title="Hainan"
+             module="Hainan_Sea"
+             sortOrder="91"
+             resource="Hainan_Sea::sea_config" />
+
+        <add id="Hainan_Sea::blog"
+             title="Blog"
+             module="Hainan_Sea"
+             parent="Hainan_Sea::sea"
+             sortOrder="92"
+             resource="Hainan_Sea::sea_config" />
+
+        <add id="Hainan_Sea::blog_setting"
+             title="Blog Setting"
+             module="Hainan_Sea"
+             parent="Hainan_Sea::blog"
+             sortOrder="0"
+             action="sea_manage/index/index"
+             resource="Hainan_Sea::sea_config" />
+
+        <add id="Hainan_Sea::blog_manage"
+             title="Blog Manage"
+             module="Hainan_Sea"
+             parent="Hainan_Sea::blog"
+             sortOrder="0"
+             action="sea_manage/index/index"
+             resource="Hainan_Sea::sea_config" />
+
+
+        <add id="Hainan_Sea::store_locator"
+             title="Store Locator"
+             module="Hainan_Sea"
+             parent="Hainan_Sea::sea"
+             sortOrder="93"
+             resource="Hainan_Sea::sea_config" />
+
+    </menu>
+</config>

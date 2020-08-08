@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Hainan\Sea\Block\Preferencea" type="Hainan\Sea\Block\Preferenceb" />
+
+    <type name="Hainan\Sea\Block\ArgumentReplace">
+        <arguments>
+            <argument name="scaler1" xsi:type="string">bar</argument>
+        </arguments>
+    </type>
+
+    <type name="Hainan\Sea\Block\Main">
+        <plugin name="hainan_plugin"
+                type="Hainan\Sea\Block\plugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+
+    <preference for="Magento\Framework\App\Arguments\ValidationState" type="Hainan\Sea\Model\ValidationState"/>
+
+</config>
