@@ -6,5 +6,51 @@
 </head>
 <body>
 
+
+    task()进入到event table里面注册计时
+然后主线程执行sleep函数，但是非常慢。计时任然在继续
+3秒到了。task()进入event queue 但是主线程依旧没有走完
+终于过了10000000ms之后主线程走完了，task()进入到主线程
+所以可以看出其真实的时间是远远大于3秒的
+
+
+4.promise 和 process.nextTick(callback)
+process.nextTick(callback)类似node.js版的"setTimeout"，在事件循环的下一次循环中调用 callback 回调函数。
+
+除了广义的同步任务和异步任务，我们可以分的更加精细一点：
+
+macro-task(宏任务)：包括整体代码script，setTimeout，setInterval
+micro-task(微任务)：Promise，process.nextTick
+不同的任务会进入到不同的event queue。比如setTimeout和setInterval会进入相同的Event
+
+setTimeout(function() {
+    console.log('setTimeout');
+})
+
+new Promise(function(resolve) {
+    console.log('promise');
+    resolve(true)
+}).then(function() {
+    console.log('then');
+})
+
+console.log('console');
+
+// promise
+// console
+// then
+// setTimeout
+
+
+首先会遇到setTimeout,将其放到红任务event queue里面
+然后回到 promise ， new promise 会立即执行， then会分发到微任务
+遇到 console 立即执行
+整体宏任务执行完成，接下来判断是否有微任务
+，刚刚放到微任务里面的then，执行
+ok，第一轮事件结束，进行第二轮，刚刚我们放在event queue 的setTimeout 函数进入到宏任务，立即执行
+结束
+终于结束了，我们来贴段巨复杂的代码搞一搞
+
+
 </body>
 </html>
