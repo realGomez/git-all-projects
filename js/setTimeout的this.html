@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout的this</title>
+</head>
+<body>
+
+    https://juejin.im/post/5c190198e51d456d7803fa47
+
+
+    var a = 1;
+function func(){
+        let a = 2;
+        setTimeout(function(){
+            console.log(a);
+            console.log(this.a);
+    },0) 
+}
+func(); //输出2 1
+
+    
+         
+</body>
+</html>

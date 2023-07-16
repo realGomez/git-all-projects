@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout的this</title>
+</head>
+<body>
+
+    https://juejin.im/entry/5afd78bff265da0b886da327
+    <p>在《高程3》中关于setTimeout的this的描述是：超时调用的代码都是在全局作用域中执行的，因此函数中this的值在非严格模式下指向window对象，
+        在严格模式下是undefined</p>
+        <p>我们知道，JavaScript是基于事件驱动单线程执行的，所有任务都需要排队，也就是说前一个任务结束，才会去执行下一个任务。而像settimeout、ajax等异步操作的回调，会进入”任务队列“中，而且只有主线程中没有执行任何同步代码的前提下，才会执行异步回调。
+
+            而settimeout(fn, 0)表示立即执行，也就是用来改变任务的执行顺序，要求浏览器”尽可能快“的进行回调。</p>
+
+            <pre>
+                3. then何时执行？
+
+                看看实例：
+                new Promise(function(resolve, reject) {
+                console.log(2)
+                for (var i = 0; i < 10000; i++) {
+                    if(i === 10) {console.log(10)}
+                    i == 9999 && resolve();
+                }
+                console.log(3)
+                }).then(function() {
+                console.log(4)
+                })
+
+                for (var i = 0; i < 5; i++) {
+                console.log('a' + i);	
+                }
+                结果： 2 10 3 a0 a1 a2 a3 a4 4
+
+                从结果来看，可以知道then方法指向的回调将在当前脚本所有同步任务执行完后执行。
+                再来回顾第一个例子：
+
+                setTimeout(function() {
+                    console.log(1)
+                 }, 0);
+                 
+                 new Promise(function(resolve, reject) {
+                   console.log(2)
+                    for (var i = 0; i < 10000; i++) {
+                     if(i === 10) {console.log(10)}
+                        i == 9999 && resolve();
+                   }
+                    console.log(3)
+                 }).then(function() {
+                    console.log(4)
+                 })
+                 
+                 console.log(5);
+                 结果是：2 10 3 5 4 1
+                 
+                 通过上面的实例，相信你已经解开了三个“何时”。可能你还有一个疑惑，那就是为什么then比setTimeout执行的要早呢？
+                 
+                 目前有两种原因导致：
+                 
+                 1） setTimeout的0是否真的为0？
+                 
+                 其实，setTimeout有个最小执行时间(minimum delay of 4ms )，并不是0s执行的。
+                 
+                 注：HTML5中已经将最小执行时间统一为4ms。
+
+                 macrotask 与 microtask
+
+                 Macrotasks和Microtasks 都属于异步任务中的一种，常用api分类：
+                 macrotasks: setTimeout, setInterval, setImmediate, I/O, UI rendering
+                 microtasks: process.nextTick, Promise, MutationObserver
+                 
+                 一个事件循环中只有一个macrotask任务，可以有一个或多个microtask任务。
+                 
+                 来看看上面实例的执行：
+                 首先，setTimeout 被推进到 macrotask 队列(将在下一个macrotask中执行)中。
+                 接着， 会先执行 macrotask 中的第一个任务（整个 script中的同步代码 ），再加上promise 构造函数也是同步的（promise.then 回调被推进到 microtask 队列中），所以会先打印出2 10 3，然后继续执行末尾的，打印出5
+                 此时，已经执行完了第一个 macrotask , 所以接下来会顺序执行所有的 microtask, 也就是 promise.then 的回调函数，从而打印出4。
+                 此时，microtask 队列中的任务已经执行完毕，所以执行剩下的 macrotask 队列中的任务，也就是 setTimeout, 所以打印出 1.
+                 
+                 经过层层测试，所以最终得出的结论是： 同步代码(包括promise的构造函数) -> promise.then -> setTimeout
+            </pre>
+</body>
+</html>
