@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>trigger</title>
+</head>
+<body>
+
+
+<button id="btn">按钮</button>
+
+<p id="msg"></p>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script>
+
+    $(function(){
+
+        $('#btn').bind("clickMe",function(event,msg1,msg2){
+
+            $("#msg").text(msg1+' '+msg2)
+
+        })
+
+        $('#btn').trigger("clickMe",["hello","jquery"])
+
+    })
+
+</script>
+
+</body>
+</html>

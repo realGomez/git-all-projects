@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4/dist/photo-sphere-viewer.min.css"/>
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uevent@2/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4/dist/photo-sphere-viewer.min.js"></script>
+
+<!-- the viewer container must have a defined size -->
+<div id="viewer" style="width: 100vw; height: 100vh;"></div>
+
+<script>
+  const viewer = new PhotoSphereViewer.Viewer({
+    container: document.querySelector('#viewer'),
+    panorama: 'https://eshop30uat-be.tslj.cn/media/wysiwyg/Home_block_B.jpg?auto=webp&format=pjpg&quality=85',
+  });
+</script>

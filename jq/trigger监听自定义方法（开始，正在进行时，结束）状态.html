@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+<span>测试</span>
+<br />
+<button>点击</button>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+<script>
+    $('span').on('tstart',function(){
+        console.log('监听到开始了');
+    })
+    $('span').on('tdoing',function(event,obj){
+        console.log('监听到正在倒计时');
+        console.log(obj)
+    })
+    $('span').on('tend',function(){
+        console.log('监听到结束了');
+    })
+
+    var isrender = true;//自动执行
+    var time = 5;
+    var tt=null;
+    init()
+    function init(){
+        if(isrender){
+            $('span').trigger('tstart')
+            func();
+        }else{
+            $("body").on("click","button",function(){
+                $('span').trigger('tstart')
+                func();
+            })
+        }
+    }
+
+
+    function func(tt){
+        if(time==0){
+            clearTimeout(tt)
+            $('span').trigger('tend')
+            return false;
+        }else{
+            time--;
+            $('span').text(time);
+            $('span').trigger('tdoing',[{'time':time}])
+        }
+        tt=setTimeout(function(){
+            func(tt)
+        },1000)
+    }
+
+
+     	$('span').on('tstart', function(event,obj) {
+    		  	console.log('监听到点击了');
+    		  	console.log(obj);
+    		});
+
+     	$('body').on('click','button', function() {
+    		 	$(this).trigger('tstart');
+    		});
+    		$("body").on("click","span",function(){
+    			var tx=$(this).text();
+    			var ind=$(this).index();
+    			$(this).trigger('tstart',[{'text':tx,'index':ind}])
+
+    		})
+</script>
+
+</body>
+</html>

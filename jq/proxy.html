@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>proxy</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script>
+        $(document).ready(function(){
+            var objPerson = {
+                name: "John Doe",
+                age: 32,
+                test: function(){
+                    $("p").after("Name: " + this.name + "<br> Age: " + this.age);
+                }
+            };
+            $("button").click($.proxy(objPerson,"test"));
+        });
+    </script>
+</head>
+<body>
+
+<button>执行 test 函数</button>
+<p></p>
+
+
+</body>
+</html>

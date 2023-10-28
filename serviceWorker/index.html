@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>service work</title>
+    <!-- <script src="./test.js" /> -->
+</head>
+<body>
+    service work
+
+    
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        // 1. 注册
+            navigator.serviceWorker.register('./service-worker.js').then((reg) => {
+                console.log('ServiceWorker register success: ', reg)
+            })
+            .catch((err) => {
+                console.log('ServiceWorker register failed: ', err)
+            });
+        }
+
+        this.addEventListener('message', (data) => {
+            if (data.source == 'service-worker') {
+                console.log(data.msg)
+            }
+        })
+        
+    </script> 
+</body>
+</html>
